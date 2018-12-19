@@ -32,6 +32,14 @@ public:
 	Mat4 getProjectionMatrix() { return projection; };
 	int shouldClose() const { return glfwWindowShouldClose(window); };
 
+	/*
+		This method is embedded inside the main loop
+		and gets called every frame. It can be used
+		to specify the main operations of the game.
+
+		@param dt	specifies the amount of time
+					since last frame.
+	*/
 	virtual void loop(float dt) = 0;
 
 };
