@@ -51,6 +51,9 @@
     <ClCompile Include="BufferConfigurator.cpp">
       <Filter>Source Files\view</Filter>
     </ClCompile>
+    <ClCompile Include="BaseOpenGLRenderer.cpp">
+      <Filter>Source Files\view</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Mat3.h">
@@ -76,6 +79,9 @@
     </ClInclude>
     <ClInclude Include="structs.h">
       <Filter>Header Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseOpenGLRenderer.h">
+      <Filter>Header Files\view</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

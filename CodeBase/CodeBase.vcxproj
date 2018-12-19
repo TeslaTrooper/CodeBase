@@ -120,6 +120,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BaseOpenGLRenderer.cpp" />
     <ClCompile Include="BufferConfigurator.cpp" />
     <ClCompile Include="Mat3.cpp" />
     <ClCompile Include="Mat4.cpp" />
@@ -129,6 +130,7 @@
     <ClCompile Include="BaseOpenGLWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BaseOpenGLRenderer.h" />
     <ClInclude Include="BufferConfigurator.h" />
     <ClInclude Include="Mat3.h" />
     <ClInclude Include="Mat4.h" />

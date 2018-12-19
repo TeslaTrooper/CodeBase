@@ -26,7 +26,6 @@ public:
 	~BaseOpenGLWindow();
 
 	void registerKeyCallback(GLFWkeyfun cbFunc);
-	void clearWindow() const;
 	void run();
 
 	Mat4 getProjectionMatrix() { return projection; };

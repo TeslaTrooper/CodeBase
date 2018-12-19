@@ -60,7 +60,6 @@ void BaseOpenGLWindow::run() {
 			continue;
 		}
 
-		clearWindow();
 		loop((float) dt);
 		glfwSwapBuffers(window);
 
@@ -68,9 +67,4 @@ void BaseOpenGLWindow::run() {
 	}
 
 	glfwTerminate();
-}
-
-void BaseOpenGLWindow::clearWindow() const {
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
 }
