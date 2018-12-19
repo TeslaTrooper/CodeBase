@@ -25,6 +25,9 @@
     <Filter Include="Source Files\view">
       <UniqueIdentifier>{086ea52f-7f93-4790-8636-f607da838789}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\util">
+      <UniqueIdentifier>{d923cefe-6331-4691-8e0d-dfa6ab9bc28b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Mat3.cpp">
@@ -43,6 +46,9 @@
       <Filter>Source Files\view</Filter>
     </ClCompile>
     <ClCompile Include="ShaderProgram.cpp">
+      <Filter>Source Files\view</Filter>
+    </ClCompile>
+    <ClCompile Include="BufferConfigurator.cpp">
       <Filter>Source Files\view</Filter>
     </ClCompile>
   </ItemGroup>
@@ -64,6 +70,12 @@
     </ClInclude>
     <ClInclude Include="ShaderProgram.h">
       <Filter>Header Files\view</Filter>
+    </ClInclude>
+    <ClInclude Include="BufferConfigurator.h">
+      <Filter>Header Files\view</Filter>
+    </ClInclude>
+    <ClInclude Include="structs.h">
+      <Filter>Header Files\util</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
