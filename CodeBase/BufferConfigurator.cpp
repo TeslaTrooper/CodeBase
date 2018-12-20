@@ -46,7 +46,7 @@ BufferConfigurator::BufferData BufferConfigurator::configure(const Bindable& bin
 	return { vao, ebo, vbo, indexData.count };
 }
 
-BufferConfigurator::ScreenQuad BufferConfigurator::configureScreenQuad() const {
+ScreenQuad BufferConfigurator::configureScreenQuad() const {
 	float quadVertices[] = {
 		// positions   // texCoords
 		-1.0f,  1.0f,  0.0f, 1.0f,
@@ -72,7 +72,7 @@ BufferConfigurator::ScreenQuad BufferConfigurator::configureScreenQuad() const {
 	return { quadVAO, quadVBO };
 }
 
-BufferConfigurator::FrameBuffer BufferConfigurator::createFrameBuffer(const Vec2 winSize) const {
+FrameBuffer BufferConfigurator::createFrameBuffer(const Vec2 winSize) const {
 	unsigned int framebuffer;
 	glGenFramebuffers(1, &framebuffer);
 	glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);

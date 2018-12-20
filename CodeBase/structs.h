@@ -24,5 +24,25 @@ namespace Binding {
 		AttributeData attributeData;
 	};
 
+	struct ScreenQuad {
+		unsigned int vao, vbo;
+	};
+
+	struct FrameBuffer {
+		unsigned int id;
+		unsigned int textureAttachment;
+		ScreenQuad screenQuad;
+
+		FrameBuffer(unsigned int id) {
+			this->id = id;
+		}
+
+		FrameBuffer(unsigned int id, unsigned int textureAttachment, ScreenQuad screenQuad) {
+			this->id = id;
+			this->textureAttachment = textureAttachment;
+			this->screenQuad = screenQuad;
+		}
+	};
+
 }
 

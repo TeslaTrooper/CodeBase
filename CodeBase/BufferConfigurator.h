@@ -13,16 +13,6 @@ class BufferConfigurator {
 
 public:
 
-	struct ScreenQuad {
-		unsigned int vao, vbo;
-	};
-
-	struct FrameBuffer {
-		unsigned int id;
-		unsigned int textureAttachment;
-		ScreenQuad screenQuad;
-	};
-
 	struct BufferData {
 		unsigned int vao;
 		unsigned int ebo;
