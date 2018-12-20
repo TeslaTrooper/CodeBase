@@ -40,6 +40,6 @@ void BaseOpenGLRenderer::createFrameBuffer(const int winWidth, const int winHeig
 	framebuffer = bufferConfigurator.createFrameBuffer({ winWidth, winHeight });
 }
 
-BufferConfigurator::BufferData BaseOpenGLRenderer::configure(const Bindable bindable) const {
-	return bufferConfigurator.configure(bindable);
+RenderData BaseOpenGLRenderer::configure(const Bindable bindable, const int drawMode) const {
+	return bufferConfigurator.configure(bindable, drawMode);
 }

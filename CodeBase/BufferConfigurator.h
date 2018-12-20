@@ -11,22 +11,13 @@ using namespace Binding;
 
 class BufferConfigurator {
 
-public:
-
-	struct BufferData {
-		unsigned int vao;
-		unsigned int ebo;
-		unsigned int vbo;
-		int indexCount;
-	};
-
-	BufferData configure(const Bindable& bindable) const;
-	FrameBuffer createFrameBuffer(const Vec2 winSize) const;
-
-private:
-
 	ScreenQuad configureScreenQuad() const;
 	int getOffset(const int currAttribIndex, const AttributeData attributeData) const;
+
+public:
+
+	RenderData configure(const Bindable& bindable, const int drawMode) const;
+	FrameBuffer createFrameBuffer(const Vec2 winSize) const;
 
 };
 

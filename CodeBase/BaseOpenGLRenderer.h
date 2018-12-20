@@ -15,11 +15,6 @@ class BaseOpenGLRenderer {
 
 public:
 
-	struct RenderData {
-		unsigned int vao;
-		int drawMode, indexCount;
-	};
-
 	BaseOpenGLRenderer() : framebuffer(0) {};
 
 	/*
@@ -41,11 +36,12 @@ public:
 		has to be configured first.
 		@param		bindable represents all necessary information for
 					configuring the vertex data.
+		@param		drawMode defines the OpenGL drawMode for this bindable.
 		@returns	the configuration data, which can be used later for
 					rendering this bindable.
 
 	*/
-	BufferConfigurator::BufferData configure(const Bindable bindable) const;
+	RenderData configure(const Bindable bindable, const int drawMode) const;
 
 
 	/*

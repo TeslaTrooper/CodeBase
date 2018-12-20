@@ -1,6 +1,6 @@
 #include "BufferConfigurator.h"
 
-BufferConfigurator::BufferData BufferConfigurator::configure(const Bindable& bindable) const {
+RenderData BufferConfigurator::configure(const Bindable& bindable, const int drawMode) const {
 	VertexData vertexData = bindable.vertexData;
 	IndexData indexData = bindable.indexData;
 	AttributeData attributeData = bindable.attributeData;
@@ -43,7 +43,7 @@ BufferConfigurator::BufferData BufferConfigurator::configure(const Bindable& bin
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 
-	return { vao, ebo, vbo, indexData.count };
+	return { vao, ebo, vbo, indexData.count, drawMode };
 }
 
 ScreenQuad BufferConfigurator::configureScreenQuad() const {

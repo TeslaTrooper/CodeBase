@@ -24,6 +24,13 @@ namespace Binding {
 		AttributeData attributeData;
 	};
 
+	struct RenderData {
+		unsigned int vao;
+		unsigned int ebo;
+		unsigned int vbo;
+		int indexCount, drawMode;
+	};
+
 	struct ScreenQuad {
 		unsigned int vao, vbo;
 	};
