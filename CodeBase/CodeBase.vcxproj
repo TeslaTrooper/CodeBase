@@ -124,6 +124,7 @@
     <ClCompile Include="BufferConfigurator.cpp" />
     <ClCompile Include="Mat3.cpp" />
     <ClCompile Include="Mat4.cpp" />
+    <ClCompile Include="PhysicsEngine.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="Vec2.cpp" />
@@ -132,8 +133,10 @@
   <ItemGroup>
     <ClInclude Include="BaseOpenGLRenderer.h" />
     <ClInclude Include="BufferConfigurator.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="Mat3.h" />
     <ClInclude Include="Mat4.h" />
+    <ClInclude Include="PhysicsEngine.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="structs.h" />

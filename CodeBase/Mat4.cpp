@@ -106,6 +106,11 @@ Vec2 Mat4::transform(const Vec2 vec) const {
 	return Vec2(x, y);
 }
 
+void Mat4::transformI(Vec2& vec) const {
+	vec.x = elements.at(0).at(0) * vec.x + elements.at(1).at(0) * vec.y + elements.at(3).at(0);
+	vec.y = elements.at(0).at(1) * vec.x + elements.at(1).at(1) * vec.y + elements.at(3).at(1);
+}
+
 const float* Mat4::ptr(const Mat4 mat) {
 	return &(mat.elements.at(0).at(0));
 }

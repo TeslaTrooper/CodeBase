@@ -12,12 +12,20 @@ Vec2 Vec2::mul(float scalar) const {
 	return Vec2(this->x * scalar, this->y * scalar);
 }
 
+Vec2 Vec2::div(float scalar) const {
+	return Vec2(this->x / scalar, this->y / scalar);
+}
+
 Vec2 Vec2::norm() const {
 	if (length() == 0) {
 		return Vec2();
 	}
 
-	return Vec2(this->x / length(), this->y / length());
+	return div(length());
+}
+
+Vec2 Vec2::norm(const float length) const {
+	return norm() * length;
 }
 
 float Vec2::length() const {
@@ -29,9 +37,7 @@ Vec2 Vec2::inv() const {
 }
 
 Vec2 Vec2::rotateTo(Vec2 vec, float length) const {
-	Vec2 res = vec.sub(*this).norm().mul(length);
-
-	return Vec2(res.x, res.y);
+	return (vec - *this).norm(length);
 }
 
 Vec2 Vec2::cross(const Vec2 vec) const {

@@ -1,5 +1,8 @@
 #pragma once
 
+#include "Vec2.h"
+#include "Mat4.h"
+
 namespace Binding {
 
 	struct IndexData {
@@ -53,3 +56,37 @@ namespace Binding {
 
 }
 
+namespace PhysX {
+
+	struct RigidBody {
+		Vec2 position;
+		Vec2 direction;
+		Vec2 movement;
+		float acceleration;
+		float vmax;
+	};
+
+	struct Geometry {
+		const Binding::VertexData vertexData;
+		const Binding::IndexData triangulatedIndexData;
+		Mat4 transformation;
+	};
+
+	struct Triangle {
+		Vec2 p1, p2, p3;
+	};
+
+}
+
+namespace CustomMath {
+
+	// Source: https://stackoverflow.com/questions/1375882/mathematically-find-max-value-without-conditional-comparison
+	static float min(const float a, const float b) {
+		return ((a + b) - abs(a - b)) / 2;
+	}
+
+	static float max(const float a, const float b) {
+		return ((a + b) + abs(a - b)) / 2;
+	}
+
+}

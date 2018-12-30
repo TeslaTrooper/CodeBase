@@ -28,6 +28,12 @@
     <Filter Include="Header Files\util">
       <UniqueIdentifier>{d923cefe-6331-4691-8e0d-dfa6ab9bc28b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\model">
+      <UniqueIdentifier>{f5eb07f2-faa7-40e1-9771-d096c5fe3d80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\model">
+      <UniqueIdentifier>{7e0151da-0239-45f4-a7b2-bfc907257f2c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Mat3.cpp">
@@ -53,6 +59,9 @@
     </ClCompile>
     <ClCompile Include="BaseOpenGLRenderer.cpp">
       <Filter>Source Files\view</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine.cpp">
+      <Filter>Source Files\model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -82,6 +91,12 @@
     </ClInclude>
     <ClInclude Include="BaseOpenGLRenderer.h">
       <Filter>Header Files\view</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine.h">
+      <Filter>Header Files\model</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Header Files\model</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

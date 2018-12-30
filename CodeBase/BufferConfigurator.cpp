@@ -32,7 +32,7 @@ RenderData BufferConfigurator::configure(const Bindable& bindable, const int dra
 		// by the size of data type the attribute is using (the default is float)
 		int stride = vertexComponentCount * sizeof(GLfloat);
 
-		// We need an offset specifing the first component of the attribute i
+		// We need an offset specifing the first component of attribute i
 		// It is calculated by the sum of component count of the previous attributes.
 		int offset = getOffset(i, attributeData);
 

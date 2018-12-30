@@ -31,6 +31,8 @@ public:
 
 	Vec2 transform(const Vec2 vec) const;
 
+	void transformI(Vec2& vec) const;
+
 	/*
 	Erzeugt eine orthographische Projektionsmatrix.
 	@param left ist linke Rand.
