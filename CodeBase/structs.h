@@ -90,3 +90,11 @@ namespace CustomMath {
 	}
 
 }
+
+namespace Projection {
+
+	static Mat4 getOrthographicProjection(const float width, const float height) {
+		return Mat4::ortho(0.0f, width, height, 0.0f, -100.0f, 100.0f);
+	}
+
+}

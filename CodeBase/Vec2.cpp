@@ -1,10 +1,10 @@
 #include "Vec2.h"
 
-Vec2 Vec2::add(Vec2 vec) const {
+Vec2 Vec2::add(const Vec2& vec) const {
 	return Vec2(this->x + vec.x, this->y + vec.y);
 }
 
-Vec2 Vec2::sub(Vec2 vec) const {
+Vec2 Vec2::sub(const Vec2& vec) const {
 	return Vec2(this->x - vec.x, this->y - vec.y);
 }
 
@@ -36,11 +36,11 @@ Vec2 Vec2::inv() const {
 	return Vec2(-x, -y);
 }
 
-Vec2 Vec2::rotateTo(Vec2 vec, float length) const {
+Vec2 Vec2::rotateTo(const Vec2& vec, float length) const {
 	return (vec - *this).norm(length);
 }
 
-Vec2 Vec2::cross(const Vec2 vec) const {
+Vec2 Vec2::cross(const Vec2& vec) const {
 	// a2 * b3 - a2 * b2
 	// a3 * b1 - a1 * b3
 	// a1 * b2 - a2 * b1

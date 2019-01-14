@@ -12,12 +12,12 @@ using namespace Binding;
 class BufferConfigurator {
 
 	ScreenQuad configureScreenQuad() const;
-	int getOffset(const int currAttribIndex, const AttributeData attributeData) const;
+	int getOffset(const int currAttribIndex, const AttributeData& attributeData) const;
 
 public:
 
 	RenderData configure(const Bindable& bindable, const int drawMode) const;
-	FrameBuffer createFrameBuffer(const Vec2 winSize) const;
+	FrameBuffer createFrameBuffer(const Vec2& winSize) const;
 
 };
 

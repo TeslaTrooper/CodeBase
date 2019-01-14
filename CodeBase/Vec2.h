@@ -16,19 +16,20 @@ public:
 	float y;
 
 	/*
-	Erzeugt einen neuen Vektor.
+		Erzeugt einen neuen Vektor.
 	*/
 	Vec2() : x(0.f), y(0.f) {};
 
 	/*
-	Erzeugt einen neuen Vektor.
-	@param x ist die x-Komponente.
-	@param y ist die x-Komponente.
+		Erzeugt einen neuen Vektor.
+
+		@param x	ist die x-Komponente.
+		@param y	ist die x-Komponente.
 	*/
 	Vec2(float x, float y) : x(x), y(y) {};
-	Vec2(int x, int y) : x((float) x), y((float) y) {};
-
-	~Vec2() {};
+	Vec2(int x, int y) : Vec2((float) x, (float) y) {};
+	Vec2(float x, int y) : Vec2((float) x, (float) y) {};
+	Vec2(int x, float y) : Vec2((float) x, (float) y) {};
 
 
 	/*
@@ -36,7 +37,7 @@ public:
 	@pararm der Vektor, um den addiert wird.
 	@return gibt die Summe aus beiden Vektoren zurück.
 	*/
-	Vec2 add(const Vec2 vec) const;
+	Vec2 add(const Vec2& vec) const;
 
 
 	/*
@@ -44,7 +45,7 @@ public:
 	@pararm der Vektor, um den subtrahiert wird.
 	@return gibt die Differenz aus beiden Vektoren zurück.
 	*/
-	Vec2 sub(const Vec2 vec) const;
+	Vec2 sub(const Vec2& vec) const;
 
 
 	/*
@@ -63,7 +64,7 @@ public:
 	@length gibt die Länge des neuen Vektors an.
 	@return gibt einen Vektor zurück, der auf vec zeigt und die gegebene Länge besitzt.
 	*/
-	Vec2 rotateTo(const Vec2 vec, const float length) const;
+	Vec2 rotateTo(const Vec2& vec, const float length) const;
 
 
 	/*
@@ -84,7 +85,7 @@ public:
 
 	Vec2 inv() const;
 
-	Vec2 cross(const Vec2 vec) const;
+	Vec2 cross(const Vec2& vec) const;
 
 	Vec2 absolut() const;
 
@@ -102,7 +103,7 @@ public:
 	Vec2 operator*(const float scalar) const { return mul(scalar); };
 	Vec2 operator/(const float scalar) const { return div(scalar); };
 	Vec2 operator-() const { return inv(); };
-	void operator=(const Vec2 vec) { x = vec.x; y = vec.y; };
+	void operator=(const Vec2& vec) { x = vec.x; y = vec.y; };
 
 };
 

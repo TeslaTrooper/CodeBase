@@ -41,7 +41,7 @@ public:
 					rendering this bindable.
 
 	*/
-	RenderData configure(const Bindable bindable, const int drawMode) const;
+	RenderData configure(const Bindable& bindable, const int drawMode) const;
 
 
 	/*
@@ -66,7 +66,7 @@ public:
 		@param	data combines all information, which is necessary
 				in order to draw polygons.
 	*/
-	virtual void draw(const RenderData data) const;
+	virtual void draw(const RenderData& data) const;
 
 
 	/*
@@ -82,12 +82,5 @@ public:
 		by invoking the draw function for each object.
 	*/
 	virtual void render() const = 0;
-
-
-	/*
-		Implement this method to change the current projection.
-		@param	projection specifies the new projection matrix.
-	*/
-	virtual void setProjection(const Mat4 projection) const = 0;
 
 };

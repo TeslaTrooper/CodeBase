@@ -11,21 +11,21 @@ using namespace Binding;
 using namespace PhysX;
 
 struct CollisionCallback {
-	virtual void resolveCollision(Entity* e1, Entity* e2, Vec2 location) const = 0;
+	virtual void resolveCollision(Entity* e1, Entity* e2, const Vec2& location) const = 0;
 };
 
 class PhysicsEngine {
 
 	const CollisionCallback* const callback;
 
-	void updatePosition(const vector<Entity*> entities, const float dt) const;
-	void updateVelocity(const vector<Entity*> bodies, const float dt) const;
-	void detectCollision(const vector<Entity*> bodies, const float dt) const;
+	void updatePosition(const vector<Entity*>& entities, const float dt) const;
+	void updateVelocity(const vector<Entity*>& bodies, const float dt) const;
+	void detectCollision(const vector<Entity*>& bodies, const float dt) const;
 
 	Vec2* detectTrianglePointIntersection(const vector<Vec2>& vertices, const vector<Triangle>& triangles) const;
-	bool detectTrianglePointIntersection(const Vec2 vertex, const Triangle& triangleconst) const;
+	bool detectTrianglePointIntersection(const Vec2& vertex, const Triangle& triangleconst) const;
 	vector<Vec2> getTransformedVertices(const Binding::VertexData& vertexData, const Mat4& transformtion) const;
-	vector<Triangle> convertVerticesToTriangles(const vector<Vec2> vertices, const Binding::IndexData& indexData) const;
+	vector<Triangle> convertVerticesToTriangles(const vector<Vec2>& vertices, const Binding::IndexData& indexData) const;
 
 public:
 
@@ -42,7 +42,7 @@ public:
 				gets processed.
 		@param	dt defines the time since last frame in seconds.
 	*/
-	void update(const vector<Entity*> bodies, const float dt) const;
+	void update(const vector<Entity*>& bodies, const float dt) const;
 
 };
 

@@ -1,10 +1,9 @@
 #include "BaseOpenGLWindow.h"
 
-BaseOpenGLWindow::BaseOpenGLWindow(int x, int y, int w, int h, const char* title) : frameRate(60) {
+BaseOpenGLWindow::BaseOpenGLWindow(int x, int y, int w, int h, const char* const title) : frameRate(60) {
 	initOpenGL();
 	initWindow(x, y, w, h, title);
 	initViewport();
-	initProjectionMatrix(w, h);
 }
 
 BaseOpenGLWindow::~BaseOpenGLWindow() {
@@ -19,7 +18,7 @@ void BaseOpenGLWindow::initOpenGL() {
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 }
 
-void BaseOpenGLWindow::initWindow(int x, int y, int w, int h, const char* title) {
+void BaseOpenGLWindow::initWindow(int x, int y, int w, int h, const char* const title) {
 	window = glfwCreateWindow(w, h, title, nullptr, nullptr);
 
 	glfwSetWindowPos(window, x, y);
@@ -36,10 +35,6 @@ void BaseOpenGLWindow::initViewport() {
 	glfwGetFramebufferSize(window, &width, &height);
 
 	glViewport(0, 0, width, height);
-}
-
-void BaseOpenGLWindow::initProjectionMatrix(int w, int h) {
-	projection = Mat4::ortho(0.0f, static_cast<GLfloat>(w), static_cast<GLfloat>(h), 0.0f, -100.0f, 100.0f);
 }
 
 void BaseOpenGLWindow::registerKeyCallback(GLFWkeyfun cbFunc) {

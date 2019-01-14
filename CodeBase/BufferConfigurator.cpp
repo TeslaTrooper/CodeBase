@@ -72,7 +72,7 @@ ScreenQuad BufferConfigurator::configureScreenQuad() const {
 	return { quadVAO, quadVBO };
 }
 
-FrameBuffer BufferConfigurator::createFrameBuffer(const Vec2 winSize) const {
+FrameBuffer BufferConfigurator::createFrameBuffer(const Vec2& winSize) const {
 	unsigned int framebuffer;
 	glGenFramebuffers(1, &framebuffer);
 	glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
@@ -95,7 +95,7 @@ FrameBuffer BufferConfigurator::createFrameBuffer(const Vec2 winSize) const {
 	return { framebuffer, textureColorAttachment, screenQuad };
 }
 
-int BufferConfigurator::getOffset(const int currAttribIndex, const AttributeData attributeData) const {
+int BufferConfigurator::getOffset(const int currAttribIndex, const AttributeData& attributeData) const {
 	int result = 0;
 
 	// Iterate over previous attributes and sum their component counts

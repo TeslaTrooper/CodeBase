@@ -7,7 +7,7 @@ void BaseOpenGLRenderer::beginDraw() const {
 	glClear(GL_COLOR_BUFFER_BIT);
 }
 
-void BaseOpenGLRenderer::draw(const RenderData data) const {
+void BaseOpenGLRenderer::draw(const RenderData& data) const {
 	glBindVertexArray(data.vao);
 	glEnable(GL_LINE_SMOOTH);
 	glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
@@ -40,6 +40,6 @@ void BaseOpenGLRenderer::createFrameBuffer(const int winWidth, const int winHeig
 	framebuffer = bufferConfigurator.createFrameBuffer({ winWidth, winHeight });
 }
 
-RenderData BaseOpenGLRenderer::configure(const Bindable bindable, const int drawMode) const {
+RenderData BaseOpenGLRenderer::configure(const Bindable& bindable, const int drawMode) const {
 	return bufferConfigurator.configure(bindable, drawMode);
 }

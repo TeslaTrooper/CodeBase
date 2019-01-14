@@ -1,12 +1,12 @@
 #include "PhysicsEngine.h"
 
-void PhysicsEngine::update(const vector<Entity*> entities, const float dt) const {
+void PhysicsEngine::update(const vector<Entity*>& entities, const float dt) const {
 	updatePosition(entities, dt);
 	detectCollision(entities, dt);
 	updateVelocity(entities, dt);
 }
 
-void PhysicsEngine::updatePosition(const vector<Entity*> entities, const float dt) const {
+void PhysicsEngine::updatePosition(const vector<Entity*>& entities, const float dt) const {
 	for each (Entity* e in entities) {
 		// Fetch all data for physx calculations
 		Vec2 position = e->getPosition();
@@ -17,7 +17,7 @@ void PhysicsEngine::updatePosition(const vector<Entity*> entities, const float d
 	}
 }
 
-void PhysicsEngine::updateVelocity(const vector<Entity*> entities, const float dt) const {
+void PhysicsEngine::updateVelocity(const vector<Entity*>& entities, const float dt) const {
 	for each (Entity* e in entities) {
 		// Fetch all data for physx calculations
 		Vec2 movement = e->getMovement();
@@ -53,7 +53,7 @@ void PhysicsEngine::updateVelocity(const vector<Entity*> entities, const float d
 	}
 }
 
-void PhysicsEngine::detectCollision(const vector<Entity*> entities, const float dt) const {
+void PhysicsEngine::detectCollision(const vector<Entity*>& entities, const float dt) const {
 	// What we need:
 	// VertexData from each object
 	// IndexData defining triangles based on VertexData
@@ -124,7 +124,7 @@ Vec2* PhysicsEngine::detectTrianglePointIntersection(const vector<Vec2>& vertice
 
 // Source: http://www.jeffreythompson.org/collision-detection/tri-point.php
 // Source: https://www.youtube.com/watch?v=HYAgJN3x4GA
-bool PhysicsEngine::detectTrianglePointIntersection(const Vec2 vertex, const Triangle& triangle) const {
+bool PhysicsEngine::detectTrianglePointIntersection(const Vec2& vertex, const Triangle& triangle) const {
 	Vec2 a = triangle.p1;
 	Vec2 b = triangle.p2;
 	Vec2 c = triangle.p3;
@@ -151,7 +151,7 @@ vector<Vec2> PhysicsEngine::getTransformedVertices(const Binding::VertexData& ve
 	return transformedVertices;
 }
 
-vector<Triangle> PhysicsEngine::convertVerticesToTriangles(const vector<Vec2> vertices, const Binding::IndexData& indexData) const {
+vector<Triangle> PhysicsEngine::convertVerticesToTriangles(const vector<Vec2>& vertices, const Binding::IndexData& indexData) const {
 	if (indexData.count % 3 != 0) {
 		printf("Wrong arguments! Unable create triangles.");
 		return vector<Triangle>();

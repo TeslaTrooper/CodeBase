@@ -11,25 +11,25 @@
 class BaseOpenGLWindow {
 
 	GLFWwindow* window;
-	Mat4 projection;
-
 	int frameRate;
 
-protected:
 	void initOpenGL();
-	void initWindow(int x, int y, int w, int h, const char* title);
+	void initWindow(int x, int y, int w, int h, const char* const title);
 	void initViewport();
-	void initProjectionMatrix(int w, int h);
+
+	int shouldClose() const { return glfwWindowShouldClose(window); };
 
 public:
-	BaseOpenGLWindow(int x, int y, int w, int h, const char* title);
+	BaseOpenGLWindow(int x, int y, int w, int h, const char* const title);
 	~BaseOpenGLWindow();
 
 	void registerKeyCallback(GLFWkeyfun cbFunc);
-	void run();
 
-	Mat4 getProjectionMatrix() { return projection; };
-	int shouldClose() const { return glfwWindowShouldClose(window); };
+	/*
+		Calling this method will start the main loop, which runs
+		until the user closes this window.
+	*/
+	void run();
 
 	/*
 		This method is embedded inside the main loop

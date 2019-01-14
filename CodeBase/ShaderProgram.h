@@ -14,7 +14,7 @@ class ShaderProgram {
 
 	GLuint createShader(const GLenum shaderType, const GLchar* shaderSource) const;
 
-	char* readShaderFile(char const * const file) const;
+	char* readShaderFile(const char* const file) const;
 
 public:
 	ShaderProgram();

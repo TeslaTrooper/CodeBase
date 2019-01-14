@@ -34,7 +34,7 @@ void ShaderProgram::compileShader(const GLuint shader, const GLchar* shaderSourc
 	glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
 
 	if (!success) {
-		std::cout << "Error compiling shader!";
+		std::cout << "Error compiling shader! " << shader;
 	}
 }
 
@@ -45,7 +45,7 @@ GLuint ShaderProgram::createShader(const GLenum shaderType, const GLchar* shader
 	return shader;
 }
 
-char* ShaderProgram::readShaderFile(char const * const file) const {
+char* ShaderProgram::readShaderFile(const char* const file) const {
 	FILE *f = nullptr;
 
 	errno_t error;
