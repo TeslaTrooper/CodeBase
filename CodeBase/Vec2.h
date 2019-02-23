@@ -101,6 +101,7 @@ public:
 	Vec2 operator+(const Vec2& vec) const { return add(vec); };
 	Vec2 operator-(const Vec2& vec) const { return sub(vec); };
 	Vec2 operator*(const float scalar) const { return mul(scalar); };
+	Vec2 operator*(const Vec2& vec) const { return Vec2(x * vec.x, y * vec.y); };
 	Vec2 operator/(const float scalar) const { return div(scalar); };
 	Vec2 operator-() const { return inv(); };
 	void operator=(const Vec2& vec) { x = vec.x; y = vec.y; };

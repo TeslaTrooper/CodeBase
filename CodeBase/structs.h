@@ -8,12 +8,18 @@ namespace Binding {
 	struct IndexData {
 		const int* indices;
 		int count;
+
+		IndexData() : IndexData(nullptr, 0) {}
+		IndexData(const int* indices, int count) : indices(indices), count(count) {}
 	};
 
 	struct VertexData {
 		const float* vertices;
 		int componentCount;
 		int count;
+
+		VertexData() : VertexData(nullptr, 0, 0) {}
+		VertexData(const float* vertices, int componentCount, int count) : vertices(vertices), componentCount(componentCount), count(count) {}
 	};
 
 	struct AttributeData {

@@ -26,7 +26,7 @@ void PhysicsEngine::updateVelocity(const vector<Entity*>& entities, const float 
 		float vmax = e->getVMax();
 
 		// Friction is an acceleration pointing in the opposite direction of current movement
-		Vec2 friction = -movement * 0.5f;
+		Vec2 friction = -movement * FRICTION_COEFFICIENT;
 		// And we have the normal acceleration, which is triggered by player input
 		Vec2 directionalAcceleration = direction * acceleration;
 		// Sum up all accelerations
@@ -74,13 +74,13 @@ void PhysicsEngine::detectCollision(const vector<Entity*>& entities, const float
 		transformedTriangles.push_back(triangles);
 	}
 
-	for (int outerIndex = 0; outerIndex < entities.size(); outerIndex++) {
+	for (size_t outerIndex = 0; outerIndex < entities.size(); outerIndex++) {
 		Entity* outerEntity = entities.at(outerIndex);
 
 		if (!outerEntity->canCollide())
 			continue;
 
-		for (int innerIndex = 0; innerIndex < entities.size(); innerIndex++) {
+		for (size_t innerIndex = 0; innerIndex < entities.size(); innerIndex++) {
 			Entity* innerEntity = entities.at(innerIndex);
 
 			if (innerIndex == outerIndex)

@@ -6,6 +6,8 @@
 
 #include "Entity.h"
 
+#define FRICTION_COEFFICIENT 0.5f
+
 using namespace std;
 using namespace Binding;
 using namespace PhysX;

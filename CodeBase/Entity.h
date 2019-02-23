@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ENTITY
+#define ENTITY
 
 #include "structs.h"
 
@@ -80,3 +81,5 @@ public:
 	*/
 	virtual IndexData getTriangulatedIndexData() const = 0;
 };
+
+#endif ENTITY
