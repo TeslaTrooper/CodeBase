@@ -1,5 +1,7 @@
 #pragma once
 
+#include <GL/glew.h>
+
 #include "Vec2.h"
 #include "Mat4.h"
 
@@ -101,6 +103,48 @@ namespace Projection {
 
 	static Mat4 getOrthographicProjection(const float width, const float height) {
 		return Mat4::ortho(0.0f, width, height, 0.0f, -100.0f, 100.0f);
+	}
+
+}
+
+namespace Textures {
+
+	enum PixelDataType {
+		RGB = GL_RGB,
+		RGBA = GL_RGBA
+	};
+
+	struct TextureInfo {
+		int width, height;
+		const void* parsedData;
+
+		~TextureInfo() {
+			delete[] parsedData;
+		}
+	};
+
+}
+
+namespace File {
+
+	static unsigned char* read(const char* const file) {
+		FILE *f = nullptr;
+
+		errno_t error;
+		error = fopen_s(&f, file, "r");
+		if (error != 0) {
+			printf("Unable to open file %s \n", file);
+		}
+
+		fseek(f, 0, SEEK_END);
+		long lSize = ftell(f);
+		rewind(f);
+
+		unsigned char* data = new unsigned char[lSize];
+		fread(data, lSize, 1, f);
+		fclose(f);
+
+		return data;
 	}
 
 }

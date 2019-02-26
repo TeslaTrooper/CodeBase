@@ -133,6 +133,7 @@
     <ClCompile Include="PhysicsEngine.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
+    <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Vec2.cpp" />
     <ClCompile Include="BaseOpenGLWindow.cpp" />
   </ItemGroup>
@@ -146,6 +147,7 @@
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="structs.h" />
+    <ClInclude Include="Texture.h" />
     <ClInclude Include="Vec2.h" />
     <ClInclude Include="BaseOpenGLWindow.h" />
   </ItemGroup>

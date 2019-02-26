@@ -3,11 +3,11 @@
 ShaderProgram::ShaderProgram() {}
 
 GLuint ShaderProgram::createShaderProgram(const char* vertexShaderFile, const char* fragmentShaderFile) const {
-	char* vertexShaderSource = readShaderFile(vertexShaderFile);
-	char* fragmentShaderSource = readShaderFile(fragmentShaderFile);
+	unsigned char* vertexShaderSource = File::read(vertexShaderFile);
+	unsigned char* fragmentShaderSource = File::read(fragmentShaderFile);
 
-	GLuint vertexShader = createShader(GL_VERTEX_SHADER, vertexShaderSource);
-	GLuint fragmentShader = createShader(GL_FRAGMENT_SHADER, fragmentShaderSource);
+	GLuint vertexShader = createShader(GL_VERTEX_SHADER, (GLchar*) vertexShaderSource);
+	GLuint fragmentShader = createShader(GL_FRAGMENT_SHADER, (GLchar*) fragmentShaderSource);
 
 	GLuint shaderProgram = glCreateProgram();
 	glAttachShader(shaderProgram, vertexShader);
@@ -43,26 +43,6 @@ GLuint ShaderProgram::createShader(const GLenum shaderType, const GLchar* shader
 	compileShader(shader, shaderSource);
 
 	return shader;
-}
-
-char* ShaderProgram::readShaderFile(const char* const file) const {
-	FILE *f = nullptr;
-
-	errno_t error;
-	error = fopen_s(&f, file, "r");
-	if (error != 0) {
-		printf("Unable to open file %s \n", file);
-	}
-
-	fseek(f, 0, SEEK_END);
-	long lSize = ftell(f);
-	rewind(f);
-
-	char* data = new char[lSize];
-	fread(data, lSize, 1, f);
-	fclose(f);
-
-	return data;
 }
 
 ShaderProgram::~ShaderProgram() {}

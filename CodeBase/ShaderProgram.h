@@ -4,6 +4,8 @@
 #include <GL/glew.h>
 #include <iostream>
 
+#include "structs.h"
+
 /*
 Diese Klasse stellt zwei Shader bereit und erlaubt es, aus diesen Shadern
 ein fertiges Shader Program zu erzeugen.
@@ -13,8 +15,6 @@ class ShaderProgram {
 	void compileShader(const GLuint shader, const GLchar* shaderSource) const;
 
 	GLuint createShader(const GLenum shaderType, const GLchar* shaderSource) const;
-
-	char* readShaderFile(const char* const file) const;
 
 public:
 	ShaderProgram();
