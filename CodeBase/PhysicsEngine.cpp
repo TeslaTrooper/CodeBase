@@ -13,7 +13,7 @@ void PhysicsEngine::updatePosition(const vector<Entity*>& entities, const float 
 		Vec2 movement = e->getMovement();
 
 		// update position: pn = pn-1+vn-1
-		e->setPosition(position + movement);
+		e->setPosition(position + (movement * dt));
 	}
 }
 
@@ -124,26 +124,27 @@ Vec2* PhysicsEngine::detectTrianglePointIntersection(const vector<Vec2>& vertice
 
 // Source: http://www.jeffreythompson.org/collision-detection/tri-point.php
 // Source: https://www.youtube.com/watch?v=HYAgJN3x4GA
+// Source: https://codeplea.com/triangular-interpolation
 bool PhysicsEngine::detectTrianglePointIntersection(const Vec2& vertex, const Triangle& triangle) const {
 	Vec2 a = triangle.p1;
 	Vec2 b = triangle.p2;
 	Vec2 c = triangle.p3;
 
-	double zaehler1 = a.x * (c.y - a.y) + (vertex.y - a.y) * (c.x - a.x) - vertex.x * (c.y - a.y);
-	double nenner1 = (b.y - a.y) * (c.x - a.x) - (b.x - a.x) * (c.y - a.y);
-	double w1 = zaehler1 / nenner1;
+	double w1 = ((b.y - c.y)*(vertex.x - c.x) + (c.x - b.x)*(vertex.y - c.y)) /
+		((b.y - c.y)*(a.x - c.x) + (c.x - b.x)*(a.y - c.y));
 
-	double zaehler2 = vertex.y - a.y - w1 * (b.y - a.y);
-	double nenner2 = c.y - a.y;
-	double w2 = zaehler2 / nenner2;
+	double w2 = ((c.y - a.y)*(vertex.x - c.x) + (a.x - c.x)*(vertex.y - c.y)) /
+		((b.y - c.y)*(a.x - c.x) + (c.x - b.x)*(a.y - c.y));
 
-	return w1 >= 0 && w2 >= 0 && (w1 + w2) <= 1;
+	double w3 = 1 - w1 - w2;
+
+	return !(w1 < 0 || w2 < 0 || w3 < 0);
 }
 
 vector<Vec2> PhysicsEngine::getTransformedVertices(const Binding::VertexData& vertexData, const Mat4& transformation) const {
 	vector<Vec2> transformedVertices;
 
-	for (int i = 0; i < vertexData.count * 2; i += Vec2::COMPONENTS) {
+	for (int i = 0; i < vertexData.count * vertexData.componentCount; i += vertexData.componentCount) {
 		Vec2 tmpVec = Vec2(vertexData.vertices[i], vertexData.vertices[i + 1]);
 		transformedVertices.push_back(transformation.transform(tmpVec));
 	}
