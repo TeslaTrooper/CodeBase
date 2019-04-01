@@ -38,6 +38,8 @@ public:
 	*/
 	Mat3 scale(Vec2 vec);
 
+	Mat3 mul(const Mat3 mat4) const;
+
 
 	/*
 	@return gibt den Pointer, der auf das 1. Element zeigt, zurück.
