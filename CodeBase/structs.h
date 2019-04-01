@@ -1,7 +1,5 @@
 #pragma once
 
-#include <GL/glew.h>
-
 #include "Vec2.h"
 #include "Mat4.h"
 
@@ -72,12 +70,30 @@ namespace PhysX {
 		Vec2 movement;
 		float acceleration;
 		float vmax;
+
+		RigidBody() : acceleration(0), vmax(0) {}
 	};
 
-	struct Geometry {
-		const Binding::VertexData vertexData;
-		const Binding::IndexData triangulatedIndexData;
+	enum BodyType {
+		STATIC, DYNAMIC, KINEMATIC
+	};
+
+	struct BodyDefinition {
+		BodyType type;
+		Vec2 position;
+		Vec2 direction;
+		Vec2 movement;
+		float acceleration;
+		float vmax;
+
+		BodyDefinition(const BodyType& type) : type(type), acceleration(0.f), vmax(0.f) {}
+	};
+
+	struct FixtureDefinition {
 		Mat4 transformation;
+		float friction;
+
+		FixtureDefinition() : friction(0.f) {}
 	};
 
 	struct Triangle {
@@ -110,8 +126,8 @@ namespace Projection {
 namespace Textures {
 
 	enum PixelDataType {
-		RGB = GL_RGB,
-		RGBA = GL_RGBA
+		RGB = 0x1907,
+		RGBA = 0x1908
 	};
 
 	struct TextureInfo {

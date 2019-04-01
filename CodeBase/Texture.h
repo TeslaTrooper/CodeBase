@@ -28,7 +28,6 @@ public:
 
 	void prepare();
 
-
 	/*
 		Binds this texture, in order to draw it.
 	*/

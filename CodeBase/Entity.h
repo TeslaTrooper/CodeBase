@@ -8,30 +8,28 @@ using namespace Binding;
 
 class Entity {
 
-	Mat4 transformation;
-	RigidBody* const body;
+	BodyDefinition* const bodyDef;
+	FixtureDefinition* const fixtureDef;
 
 public:
 
-	Entity(RigidBody* const body) : body(body) {};
-	~Entity() { delete body; };
+	Entity() : Entity(BodyType::DYNAMIC) {};
+	Entity(const BodyType& bodyType) : bodyDef(new BodyDefinition(bodyType)), fixtureDef(new FixtureDefinition()) {};
+	~Entity() { delete bodyDef; delete fixtureDef; };
 
-	void setPosition(const Vec2& value) { body->position = value; };
-	void setDirection(const Vec2& value) { body->direction = value; };
-	void setMovement(const Vec2& value) { body->movement = value; };
-	void setAcceleration(const float value) { body->acceleration = value; };
-	void setVMax(const float value) { body->vmax = value; };
-	//void setCollision(const Collision value) { collision = value; };
-	void setTransformation(const Mat4& value) { this->transformation = value; };
+	void setPosition(const Vec2& value) { bodyDef->position = value; };
+	void setDirection(const Vec2& value) { bodyDef->direction = value; };
+	void setMovement(const Vec2& value) { bodyDef->movement = value; };
+	void setAcceleration(const float value) { bodyDef->acceleration = value; };
+	void setVMax(const float value) { bodyDef->vmax = value; };
+	void setTransformation(const Mat4& value) { fixtureDef->transformation = value; };
 
-	Vec2 getPosition() const { return body->position; };
-	Vec2 getDirection() const { return body->direction; };
-	Vec2 getMovement() const { return body->movement; };
-	float getAcceleration() const { return body->acceleration; };
-	float getVMax() const { return body->vmax; };
-	//Collision getCollision() { return collision; };
-	//bool hasCollision() const { return collision.entity != nullptr; };
-	Mat4 getTransformation() const { return transformation; };
+	Vec2 getPosition() const { return bodyDef->position; };
+	Vec2 getDirection() const { return bodyDef->direction; };
+	Vec2 getMovement() const { return bodyDef->movement; };
+	float getAcceleration() const { return bodyDef->acceleration; };
+	float getVMax() const { return bodyDef->vmax; };
+	Mat4 getTransformation() const { return fixtureDef->transformation; };
 
 
 	/*
