@@ -7,3 +7,5 @@ CodeBase/Debug
 CodeBase/x64
 CodeBase.opensdf
 Release
+CodeBase/Release
+ipch
