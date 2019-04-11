@@ -1,4 +1,8 @@
-#pragma once
+#ifndef STRUCTS
+#define STRUCTS
+
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
 
 #include "Vec2.h"
 #include "Mat4.h"
@@ -58,6 +62,11 @@ namespace Binding {
 			this->textureAttachment = textureAttachment;
 			this->screenQuad = screenQuad;
 		}
+	};
+
+	enum DrawMode {
+		LINES = GL_LINES,
+		TRIANGLES = GL_TRIANGLES
 	};
 
 }
@@ -126,8 +135,8 @@ namespace Projection {
 namespace Textures {
 
 	enum PixelDataType {
-		RGB = 0x1907,
-		RGBA = 0x1908
+		RGB = GL_RGB,
+		RGBA = GL_RGBA
 	};
 
 	struct TextureInfo {
@@ -143,14 +152,20 @@ namespace Textures {
 
 namespace File {
 
-	static unsigned char* read(const char* const file) {
-		FILE *f = nullptr;
+	static FILE* open(const char* const file) {
+		FILE* f = nullptr;
 
 		errno_t error;
 		error = fopen_s(&f, file, "r");
 		if (error != 0) {
 			printf("Unable to open file %s \n", file);
 		}
+
+		return f;
+	}
+
+	static unsigned char* read(const char* const file) {
+		FILE* f = open(file);
 
 		fseek(f, 0, SEEK_END);
 		long lSize = ftell(f);
@@ -164,3 +179,23 @@ namespace File {
 	}
 
 }
+
+namespace Sound {
+
+	enum Format {
+		MONO16, STEREO16
+	};
+
+	struct WaveData {
+		const Format format;
+		void* const data;
+		const int chunkSize;
+		const int rate;
+
+		WaveData(Format format, void* data, int chunkSize, int rate) :
+			format(format), data(data), chunkSize(chunkSize), rate(rate) {}
+	};
+
+}
+
+#endif STRUCTS

@@ -99,8 +99,6 @@ void PhysicsEngine::detectCollision(const vector<Entity*>& entities, const float
 			if (collisionLocation == nullptr)
 				continue;
 
-			printf("Collision at (%f|%f)\n", collisionLocation->x, collisionLocation->y);
-
 			// Now, we know, if innerEntity is colliding with outerEntity
 			callback->resolveCollision(innerEntity, outerEntity, *collisionLocation);
 

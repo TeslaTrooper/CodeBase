@@ -1,6 +1,7 @@
 #pragma once
 
 #include <GL/glew.h>
+#include <vector>
 
 #include "structs.h"
 #include "Mat4.h"
@@ -13,9 +14,18 @@ class BaseOpenGLRenderer {
 	BufferConfigurator bufferConfigurator;
 	FrameBuffer framebuffer;
 
+	struct BufferTriple {
+		unsigned int vao, ebo, vbo;
+
+		BufferTriple(unsigned int vao, unsigned int ebo, unsigned int vbo) : vao(vao), ebo(ebo), vbo(vbo) {}
+	};
+
+	vector<BufferTriple> buffers;
+
 public:
 
 	BaseOpenGLRenderer() : framebuffer(0) {};
+	virtual ~BaseOpenGLRenderer();
 
 	/*
 		Creates a new framebuffer and changes the current render target to it.
@@ -41,7 +51,7 @@ public:
 					rendering this bindable.
 
 	*/
-	RenderData configure(const Bindable& bindable, const int drawMode) const;
+	RenderData configure(const Bindable& bindable, const int drawMode);
 
 
 	/*

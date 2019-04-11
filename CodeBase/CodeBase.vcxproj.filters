@@ -34,6 +34,12 @@
     <Filter Include="Source Files\model">
       <UniqueIdentifier>{7e0151da-0239-45f4-a7b2-bfc907257f2c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\sound">
+      <UniqueIdentifier>{b394b8e0-3fe8-48ef-b65a-51e710f97e5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\sound">
+      <UniqueIdentifier>{c1a00d3d-5e6c-4005-8809-490b2744b025}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Mat3.cpp">
@@ -51,9 +57,6 @@
     <ClCompile Include="Shader.cpp">
       <Filter>Source Files\view</Filter>
     </ClCompile>
-    <ClCompile Include="ShaderProgram.cpp">
-      <Filter>Source Files\view</Filter>
-    </ClCompile>
     <ClCompile Include="BufferConfigurator.cpp">
       <Filter>Source Files\view</Filter>
     </ClCompile>
@@ -64,6 +67,15 @@
       <Filter>Source Files\model</Filter>
     </ClCompile>
     <ClCompile Include="Texture.cpp">
+      <Filter>Source Files\view</Filter>
+    </ClCompile>
+    <ClCompile Include="WaveLoader.cpp">
+      <Filter>Source Files\sound</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundMaster.cpp">
+      <Filter>Source Files\sound</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderFactory.cpp">
       <Filter>Source Files\view</Filter>
     </ClCompile>
   </ItemGroup>
@@ -81,9 +93,6 @@
       <Filter>Header Files\view</Filter>
     </ClInclude>
     <ClInclude Include="Shader.h">
-      <Filter>Header Files\view</Filter>
-    </ClInclude>
-    <ClInclude Include="ShaderProgram.h">
       <Filter>Header Files\view</Filter>
     </ClInclude>
     <ClInclude Include="BufferConfigurator.h">
@@ -104,5 +113,19 @@
     <ClInclude Include="Texture.h">
       <Filter>Header Files\view</Filter>
     </ClInclude>
+    <ClInclude Include="WaveLoader.h">
+      <Filter>Header Files\sound</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundMaster.h">
+      <Filter>Header Files\sound</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderFactory.h">
+      <Filter>Header Files\view</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="test.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
   </ItemGroup>
 </Project>

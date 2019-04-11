@@ -3,8 +3,7 @@
 
 #include <GL/glew.h>
 
-#include "Vec2.h"
-#include "Mat4.h"
+#include "structs.h"
 #include "Mat3.h"
 
 /*

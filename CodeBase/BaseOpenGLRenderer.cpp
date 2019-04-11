@@ -40,6 +40,17 @@ void BaseOpenGLRenderer::createFrameBuffer(const int winWidth, const int winHeig
 	framebuffer = bufferConfigurator.createFrameBuffer({ winWidth, winHeight });
 }
 
-RenderData BaseOpenGLRenderer::configure(const Bindable& bindable, const int drawMode) const {
-	return bufferConfigurator.configure(bindable, drawMode);
+RenderData BaseOpenGLRenderer::configure(const Bindable& bindable, const int drawMode) {
+	RenderData result = bufferConfigurator.configure(bindable, drawMode);
+	buffers.push_back(BufferTriple(result.vao, result.ebo, result.vbo));
+
+	return result;
+}
+
+BaseOpenGLRenderer::~BaseOpenGLRenderer() {
+	for (int i = 0; i < buffers.size(); i++) {
+		glDeleteVertexArrays(1, &buffers.at(i).vao);
+		glDeleteBuffers(1, &buffers.at(i).ebo);
+		glDeleteBuffers(1, &buffers.at(i).vbo);
+	}
 }

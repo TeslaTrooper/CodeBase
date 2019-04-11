@@ -20,7 +20,7 @@ public:
 	void setPosition(const Vec2& value) { bodyDef->position = value; };
 	void setDirection(const Vec2& value) { bodyDef->direction = value; };
 	void setMovement(const Vec2& value) { bodyDef->movement = value; };
-	void setAcceleration(const float value) { bodyDef->acceleration = value; };
+	virtual void setAcceleration(const float value) { bodyDef->acceleration = value; };
 	void setVMax(const float value) { bodyDef->vmax = value; };
 	void setTransformation(const Mat4& value) { fixtureDef->transformation = value; };
 

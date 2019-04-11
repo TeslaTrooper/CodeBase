@@ -24,7 +24,7 @@ void BaseOpenGLWindow::initWindow(int x, int y, int w, int h, const char* const 
 	glfwSetWindowPos(window, x, y);
 	glfwMakeContextCurrent(window);
 
-	glewExperimental = GL_TRUE;
+	//glewExperimental = GL_TRUE;
 	glewInit();
 
 	glGetString(GL_VERSION);
