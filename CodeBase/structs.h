@@ -3,6 +3,8 @@
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <AL/al.h>
+#include <AL/alc.h>
 
 #include "Vec2.h"
 #include "Mat4.h"
@@ -156,7 +158,7 @@ namespace File {
 		FILE* f = nullptr;
 
 		errno_t error;
-		error = fopen_s(&f, file, "r");
+		error = fopen_s(&f, file, "rb");
 		if (error != 0) {
 			printf("Unable to open file %s \n", file);
 		}
@@ -178,21 +180,30 @@ namespace File {
 		return data;
 	}
 
+	static int readBytes(char* buffer, int count, FILE* stream) {
+		return (int) fread(buffer, sizeof(char), count, stream);
+	}
+
+	static int readBytes(unsigned char* buffer, int count, FILE* stream) {
+		return (int) fread(buffer, sizeof(unsigned char), count, stream);
+	}
+
 }
 
 namespace Sound {
 
 	enum Format {
-		MONO16, STEREO16
+		MONO8 = AL_FORMAT_MONO8, MONO16 = AL_FORMAT_MONO16,
+		STEREO8 = AL_FORMAT_STEREO8, STEREO16, UNSUPPORTED = AL_FORMAT_STEREO16
 	};
 
 	struct WaveData {
 		const Format format;
-		void* const data;
+		unsigned char* const data;
 		const int chunkSize;
 		const int rate;
 
-		WaveData(Format format, void* data, int chunkSize, int rate) :
+		WaveData(Format format, unsigned char* data, int chunkSize, int rate) :
 			format(format), data(data), chunkSize(chunkSize), rate(rate) {}
 	};
 

@@ -13,4 +13,5 @@
 // TODO: reference additional headers your program requires here
 #include "../CodeBase/PhysicsEngine.h"
 #include "../CodeBase/WaveLoader.h"
+#include "../CodeBase/SoundMaster.h"
 #include "ModelData.h"

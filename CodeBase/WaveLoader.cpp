@@ -10,96 +10,93 @@ WaveData WaveLoader::loadWAVFile(const char* const fileName) {
 
 	// Read the first 4 bytes (ChunkID) into xbuffer
 	// Check, if the content of xbuffer is equal to "RIFF"
-	if (fread(xbuffer, sizeof(char), 4, file) != 4 || strcmp(xbuffer, "RIFF") != 0)
+	if (File::readBytes(xbuffer, 4, file) != 4 || strcmp(xbuffer, "RIFF") != 0)
 		throw "Not a WAV file";
 
 	// Read next 4 byte as little endian (ChunkSize)
-	file_read_int32_le(xbuffer, file);
+	file_read_int32_le(file);
 
 	// Read next 4 bytes (Format) into xbuffer
 	// Check, if the content of xbuffer is equal to "WAVE"
-	if (fread(xbuffer, sizeof(char), 4, file) != 4 || strcmp(xbuffer, "WAVE") != 0)
+	if (File::readBytes(xbuffer, 4, file) != 4 || strcmp(xbuffer, "WAVE") != 0)
 		throw "Not a WAV file";
 
 	// Read next 4 bytes (Subchunk1ID) into xbuffer
 	// Check, if the content of xbuffer is equal to "fmt "
-	if (fread(xbuffer, sizeof(char), 4, file) != 4 || strcmp(xbuffer, "fmt ") != 0)
+	if (File::readBytes(xbuffer, 4, file) != 4 || strcmp(xbuffer, "fmt ") != 0)
 		throw "Invalid WAV file";
 
 	// Read next 4 bytes as little endian (Subchunk1Size)
-	file_read_int32_le(xbuffer, file);
+	int subChunkSize = file_read_int32_le(file);
+
+	// Skip 2 bytes
+	if (subChunkSize > 16)
+		fseek(file, sizeof(short), SEEK_CUR);
 
 	// Read all properties
-	short audioFormat = file_read_int16_le(xbuffer, file);
-	short channels = file_read_int16_le(xbuffer, file);
-	int sampleRate = file_read_int32_le(xbuffer, file);
-	int byteRate = file_read_int32_le(xbuffer, file);
-	file_read_int16_le(xbuffer, file);
-	short bitsPerSample = file_read_int16_le(xbuffer, file);
+	short audioFormat = file_read_int16_le(file);
+	short channels = file_read_int16_le(file);
+	int sampleRate = file_read_int32_le(file);
+	int byteRate = file_read_int32_le(file);
+	file_read_int16_le(file);
+	short bitsPerSample = file_read_int16_le(file);
 
-	//if (audioFormat != 16) {
-	if (false) {
-		short extraParams = file_read_int16_le(xbuffer, file);
-		file_ignore_bytes(extraParams, file);
+	if (File::readBytes(xbuffer, 4, file) != 4 || strcmp(xbuffer, "data") != 0) {
+		if (audioFormat == 1 && strcmp(xbuffer, "fact") != 0)
+			throw "Invalid WAV file";
+
+		fseek(file, sizeof(int), SEEK_CUR);
 	}
 
-	if (fread(xbuffer, sizeof(char), 4, file) != 4 || strcmp(xbuffer, "data") != 0)
-		throw "Invalid WAV file";
-
-	int dataChunkSize = file_read_int32_le(xbuffer, file);
+	int dataChunkSize = file_read_int32_le(file);
 	unsigned char* bufferData = file_allocate_and_read_bytes(dataChunkSize, file);
 
 	fclose(file);
 
-	Format type = GetFormatFromInfo(channels, bitsPerSample);
+	Format type = getFormat(channels, bitsPerSample);
 
 	//float duration = float(dataChunkSize) / byteRate;
 	return WaveData(type, bufferData, dataChunkSize, byteRate);
 }
 
-int WaveLoader::file_read_int32_le(char* const buffer, FILE* const file) {
+int WaveLoader::file_read_int32_le(FILE* const file) {
 	char tmpBuffer[4];
 
-	fread(tmpBuffer, sizeof(char), 4, file);
-	buffer[0] = tmpBuffer[3];
-	buffer[1] = tmpBuffer[2];
-	buffer[2] = tmpBuffer[1];
-	buffer[3] = tmpBuffer[0];
+	File::readBytes(tmpBuffer, 4, file);
 
-	int a = (int) (((unsigned char) buffer[0]) << 24);
-	int b = (int) (((unsigned char) buffer[1]) << 16);
-	int c = (int) (((unsigned char) buffer[2]) << 8);
-	int d = (int) (((unsigned char) buffer[3]));
+	int byte1 = (int) (((unsigned char) tmpBuffer[3]) << 24);
+	int byte2 = (int) (((unsigned char) tmpBuffer[2]) << 16);
+	int byte3 = (int) (((unsigned char) tmpBuffer[1]) << 8);
+	int byte4 = (int) (((unsigned char) tmpBuffer[0]));
 
-	return a | b | c | d;
+	return byte1 | byte2 | byte3 | byte4;
 }
 
-short WaveLoader::file_read_int16_le(char* const buffer, FILE* const file) {
+short WaveLoader::file_read_int16_le(FILE* const file) {
 	char tmpBuffer[2];
 
-	fread(tmpBuffer, sizeof(char), 2, file);
-	buffer[0] = tmpBuffer[1];
-	buffer[1] = tmpBuffer[0];
+	File::readBytes(tmpBuffer, 2, file);
 
-	short highByte = (short) (((unsigned char) buffer[0]) << 8);
-	short lowByte = (short) (((unsigned char) buffer[1]));
+	short byte1 = (short) (((unsigned char) tmpBuffer[1]) << 8);
+	short byte2 = (short) (((unsigned char) tmpBuffer[0]));
 
-	return highByte | lowByte;
-}
-
-void WaveLoader::file_ignore_bytes(int count, FILE* file) {
-	char* buffer = new char[count];
-
-	fread(buffer, sizeof(char), count, file);
+	return byte1 | byte2;
 }
 
 unsigned char* WaveLoader::file_allocate_and_read_bytes(int byteSize, FILE* file) {
-	unsigned char* buffer = (unsigned char*) malloc((byteSize + 1) + sizeof(char));
-	fread(buffer, byteSize, sizeof(char), file);
+	//unsigned char* buffer = (unsigned char*) malloc((byteSize) * sizeof(unsigned char));
+	unsigned char* buffer = new unsigned char[byteSize];
+	File::readBytes(buffer, byteSize, file);
 
 	return buffer;
 }
 
-Format WaveLoader::GetFormatFromInfo(short channels, short bitsPerSample) {
-	return channels == 1 ? MONO16 : STEREO16;
+Format WaveLoader::getFormat(short channels, short bitsPerSample) {
+	if (channels == 1)
+		return bitsPerSample == 8 ? MONO8 : MONO16;
+
+	if (channels == 2)
+		return bitsPerSample == 8 ? STEREO8 : STEREO16;
+
+	return UNSUPPORTED;
 }

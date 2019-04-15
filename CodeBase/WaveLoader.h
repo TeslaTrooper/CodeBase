@@ -7,11 +7,10 @@ using namespace Sound;
 
 class WaveLoader {
 
-	int file_read_int32_le(char* const buffer, FILE* const file);
-	short file_read_int16_le(char* const buffer, FILE* const file);
-	void file_ignore_bytes(int count, FILE* file);
+	int file_read_int32_le(FILE* const file);
+	short file_read_int16_le(FILE* const file);
 	unsigned char* file_allocate_and_read_bytes(int byteSize, FILE* file);
-	Format GetFormatFromInfo(short channels, short bitsPerSample);
+	Format getFormat(short channels, short bitsPerSample);
 
 public:
 
