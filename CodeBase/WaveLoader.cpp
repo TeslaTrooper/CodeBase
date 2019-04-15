@@ -41,12 +41,8 @@ WaveData WaveLoader::loadWAVFile(const char* const fileName) {
 	file_read_int16_le(file);
 	short bitsPerSample = file_read_int16_le(file);
 
-	if (File::readBytes(xbuffer, 4, file) != 4 || strcmp(xbuffer, "data") != 0) {
-		if (audioFormat == 1 && strcmp(xbuffer, "fact") != 0)
+	if (File::readBytes(xbuffer, 4, file) != 4 || strcmp(xbuffer, "data") != 0)
 			throw "Invalid WAV file";
-
-		fseek(file, sizeof(int), SEEK_CUR);
-	}
 
 	int dataChunkSize = file_read_int32_le(file);
 	unsigned char* bufferData = file_allocate_and_read_bytes(dataChunkSize, file);
@@ -55,7 +51,6 @@ WaveData WaveLoader::loadWAVFile(const char* const fileName) {
 
 	Format type = getFormat(channels, bitsPerSample);
 
-	//float duration = float(dataChunkSize) / byteRate;
 	return WaveData(type, bufferData, dataChunkSize, byteRate);
 }
 
@@ -84,8 +79,8 @@ short WaveLoader::file_read_int16_le(FILE* const file) {
 }
 
 unsigned char* WaveLoader::file_allocate_and_read_bytes(int byteSize, FILE* file) {
-	//unsigned char* buffer = (unsigned char*) malloc((byteSize) * sizeof(unsigned char));
-	unsigned char* buffer = new unsigned char[byteSize];
+	unsigned char* buffer = (unsigned char*) malloc((byteSize) * sizeof(unsigned char));
+	//unsigned char* buffer = new unsigned char[byteSize];
 	File::readBytes(buffer, byteSize, file);
 
 	return buffer;

@@ -80,7 +80,7 @@ void SoundMaster::play(int identifier, int mode, bool interrupt) const {
 }
 
 void SoundMaster::playBlocking(int identifier) const {
-	play(identifier, PLAY_MODE_LOOP, false);
+	play(identifier, PLAY_MODE_ONCE, false);
 
 	ALint state;
 	do {
