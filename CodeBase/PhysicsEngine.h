@@ -31,7 +31,7 @@ class PhysicsEngine {
 
 public:
 
-	PhysicsEngine(const CollisionCallback* const callback) : callback(callback) {};
+	__declspec(dllexport) PhysicsEngine(const CollisionCallback* const callback) : callback(callback) {};
 
 	/*
 		Calling this method calculates all physics related stuff since last frame.
@@ -44,7 +44,7 @@ public:
 				gets processed.
 		@param	dt defines the time since last frame in seconds.
 	*/
-	void update(const vector<Entity*>& bodies, const float dt) const;
+	__declspec(dllexport) void update(const vector<Entity*>& bodies, const float dt) const;
 
 };
 

@@ -7,33 +7,26 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace SoundTest {
 
-	static WaveLoader* loader;
-	static SoundMaster* soundMaster;
-	static const char* const file = "C:\\Users\\Stefan\\Documents\\Visual Studio 2015\\Projects\\Asteroids\\Asteroids\\sounds\\thrust.wav";
+	static SoundDriver* soundDriver;
+	static const char* const file = "C:\\Users\\Stefan\\Documents\\Visual Studio 2015\\Projects\\Asteroids\\Asteroids\\sounds\\saucerBig.wav";
 
 	TEST_MODULE_INITIALIZE(init) {
-		loader = new WaveLoader();
-		soundMaster = new SoundMaster();
+		soundDriver = new SoundDriver();
 
 		Logger::WriteMessage("Testing...");
 	}
 
 	TEST_MODULE_CLEANUP(cleanup) {
-		delete loader;
-		delete soundMaster;
+		delete soundDriver;
 
 		Logger::WriteMessage("Finalizing...");
 	}
 
 	TEST_CLASS(SoundTest) {
 
-		TEST_METHOD(LoadWaveFile) {
-			loader->loadWAVFile(file);
-		}
-
-		TEST_METHOD(SoundMaster) {
-			soundMaster->load(SAMPLE_SOUND, file);
-			soundMaster->playBlocking(SAMPLE_SOUND);
+		TEST_METHOD(SoundDriver) {
+			soundDriver->load(SAMPLE_SOUND, file);
+			soundDriver->playBlocking(SAMPLE_SOUND);
 		}
 
 	};

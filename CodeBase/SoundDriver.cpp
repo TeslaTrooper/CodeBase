@@ -1,10 +1,10 @@
-#include "SoundMaster.h"
+#include "SoundDriver.h"
 
-SoundMaster::SoundMaster() {
+SoundDriver::SoundDriver() {
 	initOpenAL();
 }
 
-SoundMaster::~SoundMaster() {
+SoundDriver::~SoundDriver() {
 	// delete sources
 	for (const pair<int, ALuint>& source : sources)
 		alDeleteSources(1, &source.second);
@@ -28,7 +28,7 @@ SoundMaster::~SoundMaster() {
 	alcCloseDevice(device);
 }
 
-void SoundMaster::initOpenAL() {
+void SoundDriver::initOpenAL() {
 	// Init device
 	device = alcOpenDevice(NULL);
 	if (!device)
@@ -44,7 +44,7 @@ void SoundMaster::initOpenAL() {
 	alGetError();
 }
 
-void SoundMaster::load(int identifier, const char* const file) {
+void SoundDriver::load(int identifier, const char* const file) {
 	ALuint buffer, source;
 
 	alGenBuffers(1, &buffer);
@@ -63,13 +63,12 @@ void SoundMaster::load(int identifier, const char* const file) {
 	// Connect source to buffer
 	alSourcei(source, AL_BUFFER, buffer);
 
-
 	// Wave data is now transferred to OpenAL
 	// => We can therefore delete the data
 	free(waveData.data);
 }
 
-void SoundMaster::play(int identifier, int mode, bool interrupt) const {
+void SoundDriver::play(int identifier, int mode, bool interrupt) const {
 	ALuint source = sources.at(identifier);
 
 	if (!interrupt && isPlaying(source))
@@ -79,7 +78,7 @@ void SoundMaster::play(int identifier, int mode, bool interrupt) const {
 	alSourcePlay(source);
 }
 
-void SoundMaster::playBlocking(int identifier) const {
+void SoundDriver::playBlocking(int identifier) const {
 	play(identifier, PLAY_MODE_ONCE, false);
 
 	ALint state;
@@ -88,7 +87,7 @@ void SoundMaster::playBlocking(int identifier) const {
 	} while (state != AL_STOPPED);
 }
 
-void SoundMaster::stop(int identifier) const {
+void SoundDriver::stop(int identifier) const {
 	ALuint source = sources.at(identifier);
 
 	if (isStopped(source))
@@ -97,14 +96,14 @@ void SoundMaster::stop(int identifier) const {
 	alSourceStop(source);
 }
 
-bool SoundMaster::isPlaying(ALuint source) const {
+bool SoundDriver::isPlaying(ALuint source) const {
 	ALint state;
 	alGetSourcei(source, AL_SOURCE_STATE, &state);
 
 	return state == AL_PLAYING;
 }
 
-bool SoundMaster::isStopped(ALuint source) const {
+bool SoundDriver::isStopped(ALuint source) const {
 	ALint state;
 	alGetSourcei(source, AL_SOURCE_STATE, &state);
 

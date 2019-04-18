@@ -72,11 +72,11 @@
     <ClCompile Include="WaveLoader.cpp">
       <Filter>Source Files\sound</Filter>
     </ClCompile>
-    <ClCompile Include="SoundMaster.cpp">
-      <Filter>Source Files\sound</Filter>
-    </ClCompile>
     <ClCompile Include="ShaderFactory.cpp">
       <Filter>Source Files\view</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundDriver.cpp">
+      <Filter>Source Files\sound</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -116,11 +116,14 @@
     <ClInclude Include="WaveLoader.h">
       <Filter>Header Files\sound</Filter>
     </ClInclude>
-    <ClInclude Include="SoundMaster.h">
-      <Filter>Header Files\sound</Filter>
-    </ClInclude>
     <ClInclude Include="ShaderFactory.h">
       <Filter>Header Files\view</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundDriver.h">
+      <Filter>Header Files\sound</Filter>
+    </ClInclude>
+    <ClInclude Include="InternalLogic.h">
+      <Filter>Header Files\model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

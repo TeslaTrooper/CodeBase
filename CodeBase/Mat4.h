@@ -10,7 +10,8 @@
 
 using namespace std;
 
-class Mat4 {
+class __declspec(dllexport) Mat4 {
+
 	// Index with elements.at(col).at(row)
 	array<array<float, 4>, 4> elements;
 

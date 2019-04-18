@@ -64,7 +64,7 @@ public:
 
 	/*
 		Initializes rendering on a specific framebuffer. This method has to
-		be called before rendering game objects.
+		be called before rendering internalLogic objects.
 		@param	framebufferID specifies the render target. Set this to 0
 				to use defualt framebuffer as render target.
 	*/
@@ -87,8 +87,15 @@ public:
 
 
 	/*
+		This method gets called implicitly during window creation.
+		Use this method to initialize your custom renderer, instead of constructor.
+	*/
+	virtual void setup() = 0;
+
+
+	/*
 		This method gets called implicitly by update
-		and should be used to render all game objects
+		and should be used to render all internalLogic objects
 		by invoking the draw function for each object.
 	*/
 	virtual void render() const = 0;

@@ -9,3 +9,4 @@ CodeBase.opensdf
 Release
 CodeBase/Release
 ipch
+CodeBaseTest/*.dll

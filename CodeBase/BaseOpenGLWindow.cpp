@@ -1,16 +1,21 @@
 #include "BaseOpenGLWindow.h"
 
-BaseOpenGLWindow::BaseOpenGLWindow(int x, int y, int w, int h, const char* const title) : frameRate(60) {
-	initOpenGL();
+BaseOpenGLWindow::BaseOpenGLWindow(InternalLogic* const internalLogic, BaseOpenGLRenderer* const renderer, int x, int y, int w, int h, const char* const title) : 
+	frameRate(FRAME_RATE), internalLogic(internalLogic), renderer(renderer) {
+	initGLFW();
 	initWindow(x, y, w, h, title);
 	initViewport();
+
+	renderer->setup();
 }
 
 BaseOpenGLWindow::~BaseOpenGLWindow() {
+	delete internalLogic;
+	delete renderer;
 	glfwDestroyWindow(window);
 }
 
-void BaseOpenGLWindow::initOpenGL() {
+void BaseOpenGLWindow::initGLFW() {
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, OPENGL_VERSION);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, OPENGL_VERSION);
@@ -24,10 +29,7 @@ void BaseOpenGLWindow::initWindow(int x, int y, int w, int h, const char* const 
 	glfwSetWindowPos(window, x, y);
 	glfwMakeContextCurrent(window);
 
-	//glewExperimental = GL_TRUE;
 	glewInit();
-
-	glGetString(GL_VERSION);
 }
 
 void BaseOpenGLWindow::initViewport() {
@@ -62,4 +64,10 @@ void BaseOpenGLWindow::run() {
 	}
 
 	glfwTerminate();
+}
+
+void BaseOpenGLWindow::loop(float dt) {
+	internalLogic->update(dt);
+	renderer->update(dt);
+	checkInput(dt);
 }

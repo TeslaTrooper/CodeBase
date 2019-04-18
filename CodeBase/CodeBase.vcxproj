@@ -112,7 +112,7 @@
       <AdditionalDependencies>glfw3.lib;glew32.lib;glfw3dll.lib;opengl32.lib;OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
-      <AdditionalDependencies>glfw3.lib;glew32.lib;glfw3dll.lib;opengl32.lib;OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;glew32.lib;opengl32.lib;OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <ProjectReference>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
@@ -168,7 +168,7 @@
     <ClCompile Include="PhysicsEngine.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderFactory.cpp" />
-    <ClCompile Include="SoundMaster.cpp" />
+    <ClCompile Include="SoundDriver.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Vec2.cpp" />
     <ClCompile Include="BaseOpenGLWindow.cpp" />
@@ -178,12 +178,13 @@
     <ClInclude Include="BaseOpenGLRenderer.h" />
     <ClInclude Include="BufferConfigurator.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="InternalLogic.h" />
     <ClInclude Include="Mat3.h" />
     <ClInclude Include="Mat4.h" />
     <ClInclude Include="PhysicsEngine.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderFactory.h" />
-    <ClInclude Include="SoundMaster.h" />
+    <ClInclude Include="SoundDriver.h" />
     <ClInclude Include="structs.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Vec2.h" />
