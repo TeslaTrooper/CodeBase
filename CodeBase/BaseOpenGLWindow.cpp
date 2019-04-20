@@ -1,7 +1,7 @@
 #include "BaseOpenGLWindow.h"
 
 BaseOpenGLWindow::BaseOpenGLWindow(InternalLogic* const internalLogic, BaseOpenGLRenderer* const renderer, int x, int y, int w, int h, const char* const title) : 
-	frameRate(FRAME_RATE), internalLogic(internalLogic), renderer(renderer) {
+	internalLogic(internalLogic), renderer(renderer) {
 	initGLFW();
 	initWindow(x, y, w, h, title);
 	initViewport();
@@ -15,7 +15,7 @@ BaseOpenGLWindow::~BaseOpenGLWindow() {
 	glfwDestroyWindow(window);
 }
 
-void BaseOpenGLWindow::initGLFW() {
+void BaseOpenGLWindow::initGLFW() const {
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, OPENGL_VERSION);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, OPENGL_VERSION);
@@ -32,15 +32,15 @@ void BaseOpenGLWindow::initWindow(int x, int y, int w, int h, const char* const 
 	glewInit();
 }
 
-void BaseOpenGLWindow::initViewport() {
+void BaseOpenGLWindow::initViewport() const {
 	int width, height;
 	glfwGetFramebufferSize(window, &width, &height);
 
 	glViewport(0, 0, width, height);
 }
 
-void BaseOpenGLWindow::registerKeyCallback(GLFWkeyfun cbFunc) {
-	glfwSetKeyCallback(window, cbFunc);
+void BaseOpenGLWindow::registerKeyListener() const {
+	glfwSetKeyCallback(window, UserInputController::key_callback);
 }
 
 void BaseOpenGLWindow::run() {
@@ -52,7 +52,7 @@ void BaseOpenGLWindow::run() {
 
 		glfwPollEvents();
 
-		if (dt < (GLfloat) (1000.f / frameRate) / 1000.f && dt > 0) {
+		if (dt < (GLfloat) (1000.f / FRAME_RATE) / 1000.f && dt > 0) {
 			dt += (GLfloat) glfwGetTime() - start;
 			continue;
 		}

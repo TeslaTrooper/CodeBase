@@ -78,6 +78,9 @@
     <ClCompile Include="SoundDriver.cpp">
       <Filter>Source Files\sound</Filter>
     </ClCompile>
+    <ClCompile Include="UserInputController.cpp">
+      <Filter>Source Files\view</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Mat3.h">
@@ -124,6 +127,9 @@
     </ClInclude>
     <ClInclude Include="InternalLogic.h">
       <Filter>Header Files\model</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInputController.h">
+      <Filter>Header Files\view</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

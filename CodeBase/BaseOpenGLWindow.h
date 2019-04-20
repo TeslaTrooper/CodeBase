@@ -9,6 +9,7 @@
 
 #include "BaseOpenGLRenderer.h"
 #include "InternalLogic.h"
+#include "UserInputController.h"
 
 class BaseOpenGLWindow {
 
@@ -17,11 +18,9 @@ class BaseOpenGLWindow {
 
 	GLFWwindow* window;
 
-	int frameRate;
-
 	void initWindow(int x, int y, int w, int h, const char* const title);
-	void initViewport();
-	void initGLFW();
+	void initViewport() const;
+	void initGLFW() const;
 
 	int shouldClose() const { return glfwWindowShouldClose(window); };
 
@@ -30,7 +29,13 @@ public:
 	BaseOpenGLWindow(InternalLogic* const internalLogic, BaseOpenGLRenderer* const renderer, int x, int y, int w, int h, const char* const title);
 	virtual ~BaseOpenGLWindow();
 
-	void registerKeyCallback(GLFWkeyfun cbFunc);
+
+	/*
+		In order to recognize user inputs via keyboard, use this method
+		to add the corresponding listener to the window.
+	*/
+	void registerKeyListener() const;
+
 
 	/*
 		Calling this method will start the main loop, which runs
@@ -53,6 +58,9 @@ public:
 	/*
 		In order to recognize user inputs, implement this method.
 		This method gets called implicitly inside main loop.
+
+		@param dt	specifies the amount of time
+					since last frame.
 	*/
 	virtual void checkInput(float dt) = 0;
 

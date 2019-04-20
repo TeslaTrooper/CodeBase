@@ -193,8 +193,9 @@ namespace File {
 namespace Sound {
 
 	enum Format {
-		MONO8 = AL_FORMAT_MONO8, MONO16 = AL_FORMAT_MONO16,
-		STEREO8 = AL_FORMAT_STEREO8, STEREO16, UNSUPPORTED = AL_FORMAT_STEREO16
+		MONO8 = AL_FORMAT_MONO8,		MONO16 = AL_FORMAT_MONO16,
+		STEREO8 = AL_FORMAT_STEREO8,	STEREO16 = AL_FORMAT_STEREO16,
+		UNSUPPORTED = 0
 	};
 
 	struct WaveData {
@@ -205,6 +206,15 @@ namespace Sound {
 
 		WaveData(Format format, unsigned char* data, int chunkSize, int rate) :
 			format(format), data(data), chunkSize(chunkSize), rate(rate) {}
+	};
+
+}
+
+namespace UserInput {
+
+	enum Key {
+		KEY_SPACE = GLFW_KEY_SPACE,	KEY_UP = GLFW_KEY_UP,		KEY_RIGHT = GLFW_KEY_RIGHT,
+		KEY_DOWN = GLFW_KEY_DOWN,	KEY_LEFT = GLFW_KEY_LEFT,	KEY_SHIFT = GLFW_KEY_LEFT_SHIFT
 	};
 
 }

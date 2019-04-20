@@ -170,6 +170,7 @@
     <ClCompile Include="ShaderFactory.cpp" />
     <ClCompile Include="SoundDriver.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="UserInputController.cpp" />
     <ClCompile Include="Vec2.cpp" />
     <ClCompile Include="BaseOpenGLWindow.cpp" />
     <ClCompile Include="WaveLoader.cpp" />
@@ -187,6 +188,7 @@
     <ClInclude Include="SoundDriver.h" />
     <ClInclude Include="structs.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="UserInputController.h" />
     <ClInclude Include="Vec2.h" />
     <ClInclude Include="BaseOpenGLWindow.h" />
     <ClInclude Include="WaveLoader.h" />
