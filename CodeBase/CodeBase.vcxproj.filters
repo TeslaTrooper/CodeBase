@@ -40,6 +40,18 @@
     <Filter Include="Source Files\sound">
       <UniqueIdentifier>{c1a00d3d-5e6c-4005-8809-490b2744b025}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\view\texture">
+      <UniqueIdentifier>{7263343b-6367-46ae-8fc7-b62feaa642d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\view\texture\readers">
+      <UniqueIdentifier>{cd642b28-c8ba-4e80-b73a-e4a8dafe86a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\view\texture">
+      <UniqueIdentifier>{0035ae78-a35d-45d5-ba68-771c0e6e0e8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\view\texture\readers">
+      <UniqueIdentifier>{10196595-1dd8-4a22-ba13-83e6b6df206d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Mat3.cpp">
@@ -66,9 +78,6 @@
     <ClCompile Include="PhysicsEngine.cpp">
       <Filter>Source Files\model</Filter>
     </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>Source Files\view</Filter>
-    </ClCompile>
     <ClCompile Include="WaveLoader.cpp">
       <Filter>Source Files\sound</Filter>
     </ClCompile>
@@ -80,6 +89,12 @@
     </ClCompile>
     <ClCompile Include="UserInputController.cpp">
       <Filter>Source Files\view</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Source Files\view\texture</Filter>
+    </ClCompile>
+    <ClCompile Include="BmpReader.cpp">
+      <Filter>Source Files\view\texture\readers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -113,9 +128,6 @@
     <ClInclude Include="Entity.h">
       <Filter>Header Files\model</Filter>
     </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Header Files\view</Filter>
-    </ClInclude>
     <ClInclude Include="WaveLoader.h">
       <Filter>Header Files\sound</Filter>
     </ClInclude>
@@ -130,6 +142,15 @@
     </ClInclude>
     <ClInclude Include="UserInputController.h">
       <Filter>Header Files\view</Filter>
+    </ClInclude>
+    <ClInclude Include="BmpReader.h">
+      <Filter>Header Files\view\texture\readers</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Header Files\view\texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Reader.h">
+      <Filter>Header Files\view\texture\readers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

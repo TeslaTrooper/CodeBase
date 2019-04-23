@@ -1,22 +1,32 @@
 #include "Texture.h"
 
-Texture::Texture(const char * file, PixelDataType dataType) : file(file), dataType(dataType) {}
+Texture::Texture(const char * const file, Format format) : file(file) {
+	if (format == BMP)
+		reader = new BmpReader();
+	else
+		throw "Unsupported file format!";
+}
 
-void Texture::prepare() {
+Texture::~Texture() {
+	delete[] file;
+	delete reader;
+}
+
+void Texture::loadTexture() {
 	const unsigned char* rawData = File::read(file);
 
-	TextureInfo info = readTexture(rawData);
+	TextureInfo info = reader->readTexture(rawData, alphaColor);
 	width = info.width;
 	height = info.height;
 
-	textureID = configure(info.parsedData, dataType);
+	textureID = configure(info.parsedData);
 }
 
 void Texture::bind() const {
 	glBindTexture(GL_TEXTURE_2D, textureID);
 }
 
-GLuint Texture::configure(const void* data, PixelDataType dataType) const {
+GLuint Texture::configure(const void* data) const {
 	GLuint id;
 
 	glEnable(GL_BLEND);
@@ -27,7 +37,7 @@ GLuint Texture::configure(const void* data, PixelDataType dataType) const {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, dataType, GL_UNSIGNED_BYTE, data);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 	glGenerateMipmap(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, 0);
 

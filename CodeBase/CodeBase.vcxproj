@@ -162,6 +162,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BaseOpenGLRenderer.cpp" />
+    <ClCompile Include="BmpReader.cpp" />
     <ClCompile Include="BufferConfigurator.cpp" />
     <ClCompile Include="Mat3.cpp" />
     <ClCompile Include="Mat4.cpp" />
@@ -177,12 +178,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseOpenGLRenderer.h" />
+    <ClInclude Include="BmpReader.h" />
     <ClInclude Include="BufferConfigurator.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="InternalLogic.h" />
     <ClInclude Include="Mat3.h" />
     <ClInclude Include="Mat4.h" />
     <ClInclude Include="PhysicsEngine.h" />
+    <ClInclude Include="Reader.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderFactory.h" />
     <ClInclude Include="SoundDriver.h" />

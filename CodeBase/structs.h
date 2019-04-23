@@ -136,18 +136,27 @@ namespace Projection {
 
 namespace Textures {
 
-	enum PixelDataType {
-		RGB = GL_RGB,
-		RGBA = GL_RGBA
+	enum Format {
+		BMP
 	};
 
 	struct TextureInfo {
 		int width, height;
 		const void* parsedData;
 
+		TextureInfo(int width, int height, const void* data) :
+			width(width), height(height), parsedData(data) {}
+
 		~TextureInfo() {
 			delete[] parsedData;
 		}
+	};
+
+	struct Color {
+		unsigned char r, g, b;
+
+		Color() : Color(0, 0, 0) {}
+		Color(unsigned char r, unsigned char g, unsigned char b) : r(r), g(g), b(b) {}
 	};
 
 }
