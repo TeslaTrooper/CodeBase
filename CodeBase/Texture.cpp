@@ -8,7 +8,6 @@ Texture::Texture(const char * const file, Format format) : file(file) {
 }
 
 Texture::~Texture() {
-	delete[] file;
 	delete reader;
 }
 

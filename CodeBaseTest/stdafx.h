@@ -14,4 +14,6 @@
 #include "../CodeBase/PhysicsEngine.h"
 #include "../CodeBase/WaveLoader.h"
 #include "../CodeBase/SoundDriver.h"
+#include "../CodeBase/Texture.h"
+#include "../CodeBase/structs.h"
 #include "ModelData.h"

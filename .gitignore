@@ -10,3 +10,5 @@ Release
 CodeBase/Release
 ipch
 CodeBaseTest/*.dll
+CodeBasetest/sounds
+CodeBasetest/textures

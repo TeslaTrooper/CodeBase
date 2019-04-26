@@ -25,7 +25,7 @@ public:
 		@param file		defines the absolute file path and name to the image.
 		@param dataType tells OpenGL on how to interpret the image data.
 	*/
-	Texture(const char * const file, Format format);
+	Texture(const char * const file, Textures::Format format);
 	~Texture();
 
 

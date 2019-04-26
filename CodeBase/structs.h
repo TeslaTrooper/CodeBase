@@ -175,7 +175,7 @@ namespace File {
 		return f;
 	}
 
-	static unsigned char* read(const char* const file) {
+	static unsigned char* read(const char* const file) noexcept {
 		FILE* f = open(file);
 
 		fseek(f, 0, SEEK_END);
