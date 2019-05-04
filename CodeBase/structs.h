@@ -94,6 +94,7 @@ namespace PhysX {
 		Vec2 position;
 		Vec2 direction;
 		Vec2 movement;
+		Vec2 bbox;
 		float acceleration;
 		float vmax;
 

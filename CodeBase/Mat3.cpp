@@ -44,6 +44,10 @@ Mat3 Mat3::mul(const Mat3 mat3) const {
 	return result;
 }
 
+Vec2 Mat3::getTranslation() const {
+	return Vec2(elements.at(2).at(0), elements.at(2).at(1));
+}
+
 const float * Mat3::ptr(Mat3 mat) {
 	return &(mat.elements.at(0).at(0));
 }

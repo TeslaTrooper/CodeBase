@@ -20,6 +20,7 @@ public:
 	void setPosition(const Vec2& value) { bodyDef->position = value; };
 	void setDirection(const Vec2& value) { bodyDef->direction = value; };
 	void setMovement(const Vec2& value) { bodyDef->movement = value; };
+	void setBbox(const Vec2& value) { bodyDef->bbox = value; };
 	virtual void setAcceleration(const float value) { bodyDef->acceleration = value; };
 	void setVMax(const float value) { bodyDef->vmax = value; };
 	void setTransformation(const Mat4& value) { fixtureDef->transformation = value; };
@@ -27,6 +28,7 @@ public:
 	Vec2 getPosition() const { return bodyDef->position; };
 	Vec2 getDirection() const { return bodyDef->direction; };
 	Vec2 getMovement() const { return bodyDef->movement; };
+	Vec2 getBbox() const { return bodyDef->bbox; };
 	float getAcceleration() const { return bodyDef->acceleration; };
 	float getVMax() const { return bodyDef->vmax; };
 	Mat4 getTransformation() const { return fixtureDef->transformation; };

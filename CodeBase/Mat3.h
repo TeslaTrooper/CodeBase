@@ -40,6 +40,8 @@ public:
 
 	Mat3 mul(const Mat3 mat4) const;
 
+	Vec2 getTranslation() const;
+
 
 	/*
 	@return gibt den Pointer, der auf das 1. Element zeigt, zurück.
