@@ -17,6 +17,8 @@
 #define PLAY_MODE_LOOP 1
 #define PLAY_MODE_ONCE 2
 
+using namespace Sound;
+
 class SoundDriver {
 
 	ALCdevice* device;

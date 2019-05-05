@@ -1,6 +1,6 @@
 #include "WaveLoader.h"
 
-WaveData WaveLoader::loadWAVFile(const char* const fileName) {
+Sound::WaveData WaveLoader::loadWAVFile(const char* const fileName) {
 	FILE* file = File::open(fileName);
 
 	// Defines a buffer with a usable size of 4 bytes (32 bit)
@@ -49,9 +49,9 @@ WaveData WaveLoader::loadWAVFile(const char* const fileName) {
 
 	fclose(file);
 
-	Format type = getFormat(channels, bitsPerSample);
+	Sound::Format type = getFormat(channels, bitsPerSample);
 
-	return WaveData(type, bufferData, dataChunkSize, byteRate);
+	return Sound::WaveData(type, bufferData, dataChunkSize, byteRate);
 }
 
 int WaveLoader::file_read_int32_le(FILE* const file) {
@@ -86,12 +86,12 @@ unsigned char* WaveLoader::file_allocate_and_read_bytes(int byteSize, FILE* file
 	return buffer;
 }
 
-Format WaveLoader::getFormat(short channels, short bitsPerSample) {
+Sound::Format WaveLoader::getFormat(short channels, short bitsPerSample) {
 	if (channels == 1)
-		return bitsPerSample == 8 ? MONO8 : MONO16;
+		return bitsPerSample == 8 ? Sound::MONO8 : Sound::MONO16;
 
 	if (channels == 2)
-		return bitsPerSample == 8 ? STEREO8 : STEREO16;
+		return bitsPerSample == 8 ? Sound::STEREO8 : Sound::STEREO16;
 
-	return UNSUPPORTED;
+	return Sound::UNSUPPORTED;
 }
