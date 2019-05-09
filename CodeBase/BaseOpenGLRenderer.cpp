@@ -36,8 +36,8 @@ void BaseOpenGLRenderer::update(const float dt) const {
 	endDraw();
 }
 
-void BaseOpenGLRenderer::createFrameBuffer(const int winWidth, const int winHeight) {
-	framebuffer = bufferConfigurator.createFrameBuffer({ winWidth, winHeight });
+void BaseOpenGLRenderer::createFrameBuffer(int x, int y, int winWidth, int winHeight) {
+	framebuffer = bufferConfigurator.createFrameBuffer( { x, y }, { winWidth, winHeight });
 }
 
 RenderData BaseOpenGLRenderer::configure(const Bindable& bindable, const int drawMode) {

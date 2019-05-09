@@ -29,10 +29,12 @@ public:
 
 	/*
 		Creates a new framebuffer and changes the current render target to it.
-		@param	winWidth is the width of the window.
-		@param	winheight is the height of the window.
+		@param	x is the x position of the framebuffer relative to default framebuffer
+		@param	y is the y position of the framebuffer relative to default framebuffer
+		@param	winWidth is the width of the buffer.
+		@param	winheight is the height of the buffer.
 	*/
-	void createFrameBuffer(const int winWidth, const int winHeight);
+	void createFrameBuffer(int x, int y, int winWidth, int winHeight);
 
 
 	/*

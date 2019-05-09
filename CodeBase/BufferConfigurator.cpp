@@ -46,18 +46,55 @@ RenderData BufferConfigurator::configure(const Bindable& bindable, const int dra
 	return { vao, ebo, vbo, indexData.count, drawMode };
 }
 
-ScreenQuad BufferConfigurator::configureScreenQuad() const {
-	float quadVertices[] = {
-		// positions   // texCoords
-		-1.0f,  1.0f,  0.0f, 1.0f,
-		-1.0f, -1.0f,  0.0f, 0.0f,
-		1.0f, -1.0f,  1.0f, 0.0f,
+ScreenQuad BufferConfigurator::configureScreenQuad(const Vec2& position, const Vec2& size) const {
+	// Problem: We want to have custom rect on which the framebuffer's
+	// content gets drawn. The input vectors are in pixel coordinates.
+	// => We have to calculate a rectangle with correct position
+	// and size in OpenGL NDC space.
 
-		-1.0f,  1.0f,  0.0f, 1.0f,
-		1.0f, -1.0f,  1.0f, 0.0f,
-		1.0f,  1.0f,  1.0f, 1.0f
+	// Each point of this rect has to be calculated
+	// depending on position and scale.
+	// Finally, those points have to be transformed to NDC,
+	// so OpenGL will render the rect properly.
+
+	// Note: Typically, this calculation is done in a shader,
+	// but in this simple case, we can pre-calculate this, because
+	// those values will never change.
+
+	// First, let's find out the size of default framebuffer.
+	// This is the frame on which the custom rect gets drawn.
+	// This size is necessary in order to transform from pixel to
+	// relative coordinates.
+	// This can be done by fetching viewport data.
+	GLint* values = new GLint[4];
+	glGetIntegerv(GL_VIEWPORT, values);
+
+	// Transformation (scaling) from pixel to relative coordinates
+	// depending on default framebuffer size
+	Vec2 scaling = Vec2(1.f / values[2], 1.f / values[3]);
+
+	// Transformation from relative to OpenGL
+	// specific NDC space.
+	// The order is: Pixel -> Relative -> NDC
+	Vec2 ndcLeftBottom = toNDC(position * scaling);
+	Vec2 ndcLeftTop = toNDC(Vec2(position.x, position.y + size.y) * scaling);
+	Vec2 ndcRightBottom = toNDC(Vec2(position.x + size.x, position.y) * scaling);
+	Vec2 ndcRightTop = toNDC(Vec2(position.x + size.x, position.y + size.y) * scaling);
+
+	// Finally, the rect gets described by two triangles, which
+	// consists of the previously calculated NDC coordiantes
+	float quadVertices[] = {
+		// positions							// texCoords
+		ndcLeftTop.x,		ndcLeftTop.y,		0.0f, 1.0f,	//left up
+		ndcLeftBottom.x,	ndcLeftBottom.y,	0.0f, 0.0f,	// left bottom
+		ndcRightBottom.x,	ndcRightBottom.y,	1.0f, 0.0f,	// right bottom
+
+		ndcLeftTop.x,		ndcLeftTop.y,		0.0f, 1.0f,	//left up
+		ndcRightBottom.x,	ndcRightBottom.y,	1.0f, 0.0f,	// right bottom
+		ndcRightTop.x,		ndcRightTop.y,		1.0f, 1.0f	// right up
 	};
 
+	// Standard buffer configuration & initialization
 	unsigned int quadVAO, quadVBO;
 	glGenVertexArrays(1, &quadVAO);
 	glGenBuffers(1, &quadVBO);
@@ -72,7 +109,7 @@ ScreenQuad BufferConfigurator::configureScreenQuad() const {
 	return { quadVAO, quadVBO };
 }
 
-FrameBuffer BufferConfigurator::createFrameBuffer(const Vec2& winSize) const {
+FrameBuffer BufferConfigurator::createFrameBuffer(const Vec2& position, const Vec2& size) const {
 	unsigned int framebuffer;
 	glGenFramebuffers(1, &framebuffer);
 	glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
@@ -80,7 +117,7 @@ FrameBuffer BufferConfigurator::createFrameBuffer(const Vec2& winSize) const {
 	unsigned int textureColorAttachment;
 	glGenTextures(1, &textureColorAttachment);
 	glBindTexture(GL_TEXTURE_2D, textureColorAttachment);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, (GLsizei) winSize.x, (GLsizei) winSize.y, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, (GLsizei) size.x, (GLsizei) size.y, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textureColorAttachment, 0);
@@ -90,7 +127,7 @@ FrameBuffer BufferConfigurator::createFrameBuffer(const Vec2& winSize) const {
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-	ScreenQuad screenQuad = configureScreenQuad();
+	ScreenQuad screenQuad = configureScreenQuad(position, size);
 
 	return { framebuffer, textureColorAttachment, screenQuad };
 }
