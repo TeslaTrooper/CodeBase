@@ -1,10 +1,17 @@
 #include "BaseOpenGLRenderer.h"
 
-void BaseOpenGLRenderer::beginDraw() const {
-	glBindFramebuffer(GL_FRAMEBUFFER, framebuffer.id);
+void BaseOpenGLRenderer::setup(int defaultFramebufferWidth, int defaultFramebufferHeight) {
+	framebuffers.insert(pair<int, FrameBuffer>(0, FrameBuffer(defaultFramebufferWidth, defaultFramebufferHeight)));
+}
 
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
+void BaseOpenGLRenderer::beginDraw() const {
+	// Clear all framebuffers
+	for (const pair<int, FrameBuffer>& pair : framebuffers) {
+		glBindFramebuffer(GL_FRAMEBUFFER, pair.second.id);
+
+		glClearColor(CLEAR_COLOR, CLEAR_COLOR, CLEAR_COLOR, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+	}
 }
 
 void BaseOpenGLRenderer::draw(const RenderData& data) const {
@@ -18,11 +25,29 @@ void BaseOpenGLRenderer::draw(const RenderData& data) const {
 void BaseOpenGLRenderer::endDraw() const {
 	glBindVertexArray(0);
 
-	if (framebuffer.id != 0) {
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	// If there is only default framebuffer present
+	// there is nothing to to.
+	if (framebuffers.size() == 1)
+		return;
 
-		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
+	// Bind back to default framebuffer in order to 
+	// draw all quads with their texture attachments
+	// Clearing is not necessary, because default
+	// framebuffer gets cleared in beginDraw().
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+	// Update viewport
+	const FrameBuffer& defaultFramebuffer = framebuffers.at(0);
+	glViewport(0, 0, defaultFramebuffer.width, defaultFramebuffer.height);
+
+	// Iterate over all created buffers and render their quads
+	// with corresponding texture attachments
+	for (const pair<int, FrameBuffer>& pair : framebuffers) {
+		const FrameBuffer& framebuffer = pair.second;
+
+		// Default framebuffer does not have any attachments
+		if (framebuffer.id == 0)
+			continue;
 
 		glBindVertexArray(framebuffer.screenQuad.vao);
 		glBindTexture(GL_TEXTURE_2D, framebuffer.textureAttachment);
@@ -36,8 +61,18 @@ void BaseOpenGLRenderer::update(const float dt) const {
 	endDraw();
 }
 
-void BaseOpenGLRenderer::createFrameBuffer(int x, int y, int winWidth, int winHeight) {
-	framebuffer = bufferConfigurator.createFrameBuffer( { x, y }, { winWidth, winHeight });
+int BaseOpenGLRenderer::createFrameBuffer(int x, int y, int winWidth, int winHeight) {
+	const FrameBuffer& framebuffer = bufferConfigurator.createFrameBuffer({ x, y }, { winWidth, winHeight });
+	framebuffers.insert(pair<int, FrameBuffer>(framebuffer.id, framebuffer));
+
+	return framebuffer.id;
+}
+
+void BaseOpenGLRenderer::bindFrameBuffer(int identifier) const {
+	glBindFramebuffer(GL_FRAMEBUFFER, identifier);
+
+	const FrameBuffer& framebuffer = framebuffers.at(identifier);
+	glViewport(0, 0, framebuffer.width, framebuffer.height);
 }
 
 RenderData BaseOpenGLRenderer::configure(const Bindable& bindable, const int drawMode) {

@@ -129,7 +129,7 @@ FrameBuffer BufferConfigurator::createFrameBuffer(const Vec2& position, const Ve
 
 	ScreenQuad screenQuad = configureScreenQuad(position, size);
 
-	return { framebuffer, textureColorAttachment, screenQuad };
+	return FrameBuffer(framebuffer, textureColorAttachment, screenQuad, (int) size.x, (int) size.y);
 }
 
 int BufferConfigurator::getOffset(const int currAttribIndex, const AttributeData& attributeData) const {

@@ -6,7 +6,7 @@ BaseOpenGLWindow::BaseOpenGLWindow(InternalLogic* const internalLogic, BaseOpenG
 	initWindow(x, y, w, h, title);
 	initViewport();
 
-	renderer->setup();
+	renderer->setup(w, h);
 }
 
 BaseOpenGLWindow::~BaseOpenGLWindow() {

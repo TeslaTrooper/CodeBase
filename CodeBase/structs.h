@@ -53,17 +53,14 @@ namespace Binding {
 	struct FrameBuffer {
 		unsigned int id;
 		unsigned int textureAttachment;
+		unsigned int width, height;
+
 		ScreenQuad screenQuad;
 
-		FrameBuffer(unsigned int id) {
-			this->id = id;
-		}
+		FrameBuffer(int width, int height) : id(0), width(width), height(height) {}
 
-		FrameBuffer(unsigned int id, unsigned int textureAttachment, ScreenQuad screenQuad) {
-			this->id = id;
-			this->textureAttachment = textureAttachment;
-			this->screenQuad = screenQuad;
-		}
+		FrameBuffer(unsigned int id, unsigned int textureAttachment, ScreenQuad screenQuad, int width, int height) :
+			id(id), width(width), height(height), textureAttachment(textureAttachment), screenQuad(screenQuad) {}
 	};
 
 	enum DrawMode {

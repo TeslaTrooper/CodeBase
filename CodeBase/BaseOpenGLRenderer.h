@@ -2,17 +2,20 @@
 
 #include <GL/glew.h>
 #include <vector>
+#include <map>
 
 #include "structs.h"
 #include "Mat4.h"
 #include "BufferConfigurator.h"
+
+#define CLEAR_COLOR 0.0f
 
 using namespace Binding;
 
 class BaseOpenGLRenderer {
 
 	BufferConfigurator bufferConfigurator;
-	FrameBuffer framebuffer;
+	map<int, FrameBuffer> framebuffers;
 
 	struct BufferTriple {
 		unsigned int vao, ebo, vbo;
@@ -24,7 +27,6 @@ class BaseOpenGLRenderer {
 
 public:
 
-	BaseOpenGLRenderer() : framebuffer(0) {};
 	virtual ~BaseOpenGLRenderer();
 
 	/*
@@ -33,14 +35,17 @@ public:
 		@param	y is the y position of the framebuffer relative to default framebuffer
 		@param	winWidth is the width of the buffer.
 		@param	winheight is the height of the buffer.
+		@return the index of the framebuffer for later binding.
 	*/
-	void createFrameBuffer(int x, int y, int winWidth, int winHeight);
+	int createFrameBuffer(int x, int y, int winWidth, int winHeight);
 
 
 	/*
-		@returns the currently set render target as a FrameBuffer.
+		Use this method to bind to a different framebuffer.
+		@param	identifier is used to identify the framebuffer. This value should be
+				one of the returned values of createFrameBuffer(...).
 	*/
-	FrameBuffer getRenderTarget() const { return framebuffer; };
+	void bindFrameBuffer(int identifier) const;
 
 
 	/*
@@ -91,8 +96,12 @@ public:
 	/*
 		This method gets called implicitly during window creation.
 		Use this method to initialize your custom renderer, instead of constructor.
+		@param	is the width for default framebuffer, which was created during window
+				initialization.
+		@param	is the height for default framebuffer, which was created during window
+				initialization.
 	*/
-	virtual void setup() = 0;
+	virtual void setup(int defaultFramebufferWidth, int defaultFramebufferHeight);
 
 
 	/*
