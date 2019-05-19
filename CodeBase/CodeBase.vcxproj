@@ -182,6 +182,7 @@
     <ClInclude Include="BufferConfigurator.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="GameWorld.h" />
     <ClInclude Include="InternalLogic.h" />
     <ClInclude Include="Mat3.h" />
     <ClInclude Include="Mat4.h" />

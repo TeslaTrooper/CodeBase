@@ -155,6 +155,9 @@
     <ClInclude Include="Camera.h">
       <Filter>Header Files\view</Filter>
     </ClInclude>
+    <ClInclude Include="GameWorld.h">
+      <Filter>Header Files\model</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Media Include="test.wav">
