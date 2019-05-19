@@ -122,6 +122,10 @@ namespace CustomMath {
 		return ((a + b) + abs(a - b)) / 2;
 	}
 
+	static int random(const int min, const int max) {
+		return rand() % (max - min + 1) + min;
+	}
+
 }
 
 namespace Projection {
