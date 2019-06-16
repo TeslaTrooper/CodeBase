@@ -74,6 +74,8 @@ void PhysicsEngine::detectCollision(const vector<Entity*>& entities, const float
 		transformedTriangles.push_back(triangles);
 	}
 
+	vector<Tuple> detectedCollisions;
+
 	for (size_t outerIndex = 0; outerIndex < entities.size(); outerIndex++) {
 		Entity* outerEntity = entities.at(outerIndex);
 
@@ -92,6 +94,11 @@ void PhysicsEngine::detectCollision(const vector<Entity*>& entities, const float
 			if (!outerEntity->canCollideWith(innerEntity))
 				continue;
 
+			const Tuple t = { (int) innerIndex, (int) outerIndex };
+
+			if (collisionAlreadyDetected(t, detectedCollisions))
+				continue;
+
 			// At this point, a collision detection between innerEntity
 			// and outerEntity is allowed.
 
@@ -100,11 +107,24 @@ void PhysicsEngine::detectCollision(const vector<Entity*>& entities, const float
 				continue;
 
 			// Now, we know, if innerEntity is colliding with outerEntity
+			detectedCollisions.push_back(t);
+
 			callback->resolveCollision(innerEntity, outerEntity, *collisionLocation);
 
 			delete collisionLocation;
 		}
 	}
+}
+
+bool PhysicsEngine::collisionAlreadyDetected(const Tuple& tuple, const vector<Tuple>& indices) const {
+	auto iterator = find_if(indices.begin(), indices.end(), [&](const Tuple& val) {
+		if (val == tuple)
+			return true;
+		return false;
+	});
+
+	// Iterator is equal to end(), if element was not found
+	return iterator != indices.end();
 }
 
 Vec2* PhysicsEngine::detectTrianglePointIntersection(const vector<Vec2>& vertices, const vector<Triangle>& triangles) const {
