@@ -26,7 +26,7 @@ Mat4 Mat4::getTransformation(const Vec2 position, const Vec2 size, const float a
 	Mat4 scaling = Mat4::scale(size);
 	Mat4 rotation = Mat4::rotateZ(angleDeg, rotationPoint);
 
-	return translation.mul(scaling.mul(rotation));
+	return translation.mul(rotation.mul(scaling));
 }
 
 Mat4 Mat4::rotateX(const float angleDeg) {
