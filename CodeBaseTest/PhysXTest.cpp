@@ -137,8 +137,9 @@ namespace CodeBaseTest {
 			e->setDirection(Vec2(1, 0));
 			entities.push_back(e);
 
-			simulate();
-			Assert::AreEqual(SIMULATION_STEPS * e->getMovement().length(), e->getPosition().x);
+			//simulate();
+			engine->update(entities, 10.f);
+			Assert::AreEqual(10.f * e->getMovement().length(), e->getPosition().x);
 			Assert::AreEqual(5.f, e->getMovement().length());
 		}
 
