@@ -12,7 +12,7 @@
 
 using namespace Binding;
 
-class BaseOpenGLRenderer {
+class BaseRenderer {
 
 	BufferConfigurator bufferConfigurator;
 	map<int, FrameBuffer> framebuffers;
@@ -27,7 +27,7 @@ class BaseOpenGLRenderer {
 
 public:
 
-	virtual ~BaseOpenGLRenderer();
+	virtual ~BaseRenderer();
 
 	/*
 		Creates a new framebuffer and changes the current render target to it.

@@ -9,7 +9,7 @@
 
 #include "BaseRenderer.h"
 #include "InternalLogic.h"
-#include "UserInputController.h"
+#include "KeyCallbackHandler.h"
 
 class BaseController {
 

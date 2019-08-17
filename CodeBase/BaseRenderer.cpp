@@ -1,10 +1,10 @@
-#include "BaseOpenGLRenderer.h"
+#include "BaseRenderer.h"
 
-void BaseOpenGLRenderer::setup(int defaultFramebufferWidth, int defaultFramebufferHeight) {
+void BaseRenderer::setup(int defaultFramebufferWidth, int defaultFramebufferHeight) {
 	framebuffers.insert(pair<int, FrameBuffer>(0, FrameBuffer(defaultFramebufferWidth, defaultFramebufferHeight)));
 }
 
-void BaseOpenGLRenderer::beginDraw() const {
+void BaseRenderer::beginDraw() const {
 	// Clear all framebuffers
 	for (const pair<int, FrameBuffer>& pair : framebuffers) {
 		glBindFramebuffer(GL_FRAMEBUFFER, pair.second.id);
@@ -14,7 +14,7 @@ void BaseOpenGLRenderer::beginDraw() const {
 	}
 }
 
-void BaseOpenGLRenderer::draw(const RenderData& data) const {
+void BaseRenderer::draw(const RenderData& data) const {
 	glBindVertexArray(data.vao);
 	glEnable(GL_LINE_SMOOTH);
 	glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
@@ -22,7 +22,7 @@ void BaseOpenGLRenderer::draw(const RenderData& data) const {
 	glDrawElements(data.drawMode, data.indexCount, GL_UNSIGNED_INT, 0);
 }
 
-void BaseOpenGLRenderer::endDraw() const {
+void BaseRenderer::endDraw() const {
 	glBindVertexArray(0);
 
 	// If there is only default framebuffer present
@@ -55,34 +55,34 @@ void BaseOpenGLRenderer::endDraw() const {
 	}
 }
 
-void BaseOpenGLRenderer::update(const float dt) const {
+void BaseRenderer::update(const float dt) const {
 	beginDraw();
 	render();
 	endDraw();
 }
 
-int BaseOpenGLRenderer::createFrameBuffer(int x, int y, int winWidth, int winHeight) {
+int BaseRenderer::createFrameBuffer(int x, int y, int winWidth, int winHeight) {
 	const FrameBuffer& framebuffer = bufferConfigurator.createFrameBuffer({ x, y }, { winWidth, winHeight });
 	framebuffers.insert(pair<int, FrameBuffer>(framebuffer.id, framebuffer));
 
 	return framebuffer.id;
 }
 
-void BaseOpenGLRenderer::bindFrameBuffer(int identifier) const {
+void BaseRenderer::bindFrameBuffer(int identifier) const {
 	glBindFramebuffer(GL_FRAMEBUFFER, identifier);
 
 	const FrameBuffer& framebuffer = framebuffers.at(identifier);
 	glViewport(0, 0, framebuffer.width, framebuffer.height);
 }
 
-RenderData BaseOpenGLRenderer::configure(const Bindable& bindable, const int drawMode) {
+RenderData BaseRenderer::configure(const Bindable& bindable, const int drawMode) {
 	RenderData result = bufferConfigurator.configure(bindable, drawMode);
 	buffers.push_back(BufferTriple(result.vao, result.ebo, result.vbo));
 
 	return result;
 }
 
-BaseOpenGLRenderer::~BaseOpenGLRenderer() {
+BaseRenderer::~BaseRenderer() {
 	for (int i = 0; i < buffers.size(); i++) {
 		glDeleteVertexArrays(1, &buffers.at(i).vao);
 		glDeleteBuffers(1, &buffers.at(i).ebo);

@@ -19,15 +19,6 @@
     <Filter Include="Source Files\math">
       <UniqueIdentifier>{ff8e595e-caf6-4578-a0d5-8e4bb2d0001c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\view">
-      <UniqueIdentifier>{6f6f4a5c-9df0-4b84-906b-808fec3e5af3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\view">
-      <UniqueIdentifier>{086ea52f-7f93-4790-8636-f607da838789}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\util">
-      <UniqueIdentifier>{d923cefe-6331-4691-8e0d-dfa6ab9bc28b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\model">
       <UniqueIdentifier>{f5eb07f2-faa7-40e1-9771-d096c5fe3d80}</UniqueIdentifier>
     </Filter>
@@ -40,17 +31,32 @@
     <Filter Include="Source Files\sound">
       <UniqueIdentifier>{c1a00d3d-5e6c-4005-8809-490b2744b025}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\view\texture">
+    <Filter Include="Header Files\ui">
+      <UniqueIdentifier>{6f6f4a5c-9df0-4b84-906b-808fec3e5af3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ui\texture">
       <UniqueIdentifier>{7263343b-6367-46ae-8fc7-b62feaa642d7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\view\texture\readers">
+    <Filter Include="Header Files\ui\texture\readers">
       <UniqueIdentifier>{cd642b28-c8ba-4e80-b73a-e4a8dafe86a8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\view\texture">
+    <Filter Include="Header Files\ui\util">
+      <UniqueIdentifier>{e48e1fe2-7efa-483b-b166-d6f6ab244765}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ui">
+      <UniqueIdentifier>{086ea52f-7f93-4790-8636-f607da838789}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ui\texture">
       <UniqueIdentifier>{0035ae78-a35d-45d5-ba68-771c0e6e0e8e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\view\texture\readers">
+    <Filter Include="Source Files\ui\texture\readers">
       <UniqueIdentifier>{10196595-1dd8-4a22-ba13-83e6b6df206d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ui\util">
+      <UniqueIdentifier>{584ef913-bbe4-4b3c-8848-dbbb54542b43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\api">
+      <UniqueIdentifier>{d923cefe-6331-4691-8e0d-dfa6ab9bc28b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -63,38 +69,38 @@
     <ClCompile Include="Vec2.cpp">
       <Filter>Source Files\math</Filter>
     </ClCompile>
-    <ClCompile Include="BaseOpenGLWindow.cpp">
-      <Filter>Source Files\view</Filter>
-    </ClCompile>
-    <ClCompile Include="Shader.cpp">
-      <Filter>Source Files\view</Filter>
-    </ClCompile>
-    <ClCompile Include="BufferConfigurator.cpp">
-      <Filter>Source Files\view</Filter>
-    </ClCompile>
-    <ClCompile Include="BaseOpenGLRenderer.cpp">
-      <Filter>Source Files\view</Filter>
-    </ClCompile>
     <ClCompile Include="PhysicsEngine.cpp">
       <Filter>Source Files\model</Filter>
     </ClCompile>
     <ClCompile Include="WaveLoader.cpp">
       <Filter>Source Files\sound</Filter>
     </ClCompile>
-    <ClCompile Include="ShaderFactory.cpp">
-      <Filter>Source Files\view</Filter>
-    </ClCompile>
     <ClCompile Include="SoundDriver.cpp">
       <Filter>Source Files\sound</Filter>
     </ClCompile>
-    <ClCompile Include="UserInputController.cpp">
-      <Filter>Source Files\view</Filter>
-    </ClCompile>
     <ClCompile Include="Texture.cpp">
-      <Filter>Source Files\view\texture</Filter>
+      <Filter>Source Files\ui\texture</Filter>
     </ClCompile>
     <ClCompile Include="BmpReader.cpp">
-      <Filter>Source Files\view\texture\readers</Filter>
+      <Filter>Source Files\ui\texture\readers</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseController.cpp">
+      <Filter>Source Files\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseRenderer.cpp">
+      <Filter>Source Files\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="BufferConfigurator.cpp">
+      <Filter>Source Files\ui\util</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Source Files\ui\util</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderFactory.cpp">
+      <Filter>Source Files\ui\util</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyCallbackHandler.cpp">
+      <Filter>Source Files\ui\util</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -107,20 +113,8 @@
     <ClInclude Include="Vec2.h">
       <Filter>Header Files\math</Filter>
     </ClInclude>
-    <ClInclude Include="BaseOpenGLWindow.h">
-      <Filter>Header Files\view</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader.h">
-      <Filter>Header Files\view</Filter>
-    </ClInclude>
-    <ClInclude Include="BufferConfigurator.h">
-      <Filter>Header Files\view</Filter>
-    </ClInclude>
     <ClInclude Include="structs.h">
-      <Filter>Header Files\util</Filter>
-    </ClInclude>
-    <ClInclude Include="BaseOpenGLRenderer.h">
-      <Filter>Header Files\view</Filter>
+      <Filter>Header Files\api</Filter>
     </ClInclude>
     <ClInclude Include="PhysicsEngine.h">
       <Filter>Header Files\model</Filter>
@@ -131,32 +125,44 @@
     <ClInclude Include="WaveLoader.h">
       <Filter>Header Files\sound</Filter>
     </ClInclude>
-    <ClInclude Include="ShaderFactory.h">
-      <Filter>Header Files\view</Filter>
-    </ClInclude>
     <ClInclude Include="SoundDriver.h">
       <Filter>Header Files\sound</Filter>
     </ClInclude>
     <ClInclude Include="InternalLogic.h">
       <Filter>Header Files\model</Filter>
     </ClInclude>
-    <ClInclude Include="UserInputController.h">
-      <Filter>Header Files\view</Filter>
-    </ClInclude>
     <ClInclude Include="BmpReader.h">
-      <Filter>Header Files\view\texture\readers</Filter>
+      <Filter>Header Files\ui\texture\readers</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
-      <Filter>Header Files\view\texture</Filter>
+      <Filter>Header Files\ui\texture</Filter>
     </ClInclude>
     <ClInclude Include="Reader.h">
-      <Filter>Header Files\view\texture\readers</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Header Files\view</Filter>
+      <Filter>Header Files\ui\texture\readers</Filter>
     </ClInclude>
     <ClInclude Include="GameWorld.h">
       <Filter>Header Files\model</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseRenderer.h">
+      <Filter>Header Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseController.h">
+      <Filter>Header Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="BufferConfigurator.h">
+      <Filter>Header Files\ui\util</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files\ui\util</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Header Files\ui\util</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderFactory.h">
+      <Filter>Header Files\ui\util</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyCallbackHandler.h">
+      <Filter>Header Files\ui\util</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

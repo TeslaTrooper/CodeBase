@@ -57,10 +57,10 @@ namespace Binding {
 
 		ScreenQuad screenQuad;
 
-		FrameBuffer(int width, int height) : id(0), width(width), height(height) {}
-
 		FrameBuffer(unsigned int id, unsigned int textureAttachment, ScreenQuad screenQuad, int width, int height) :
 			id(id), width(width), height(height), textureAttachment(textureAttachment), screenQuad(screenQuad) {}
+		
+		FrameBuffer(int width, int height) : FrameBuffer(0, 0, { 0, 0 }, width, height) {}
 	};
 
 	enum DrawMode {

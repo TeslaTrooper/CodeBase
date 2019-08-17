@@ -1,6 +1,6 @@
-#include "BaseOpenGLWindow.h"
+#include "BaseController.h"
 
-BaseOpenGLWindow::BaseOpenGLWindow(InternalLogic* const internalLogic, BaseOpenGLRenderer* const renderer, int x, int y, int w, int h, const char* const title) : 
+BaseController::BaseController(InternalLogic* const internalLogic, BaseRenderer* const renderer, int x, int y, int w, int h, const char* const title) :
 	internalLogic(internalLogic), renderer(renderer) {
 	initGLFW();
 	initWindow(x, y, w, h, title);
@@ -9,13 +9,13 @@ BaseOpenGLWindow::BaseOpenGLWindow(InternalLogic* const internalLogic, BaseOpenG
 	renderer->setup(w, h);
 }
 
-BaseOpenGLWindow::~BaseOpenGLWindow() {
+BaseController::~BaseController() {
 	delete internalLogic;
 	delete renderer;
 	glfwDestroyWindow(window);
 }
 
-void BaseOpenGLWindow::initGLFW() const {
+void BaseController::initGLFW() const {
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, OPENGL_VERSION);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, OPENGL_VERSION);
@@ -23,7 +23,7 @@ void BaseOpenGLWindow::initGLFW() const {
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 }
 
-void BaseOpenGLWindow::initWindow(int x, int y, int w, int h, const char* const title) {
+void BaseController::initWindow(int x, int y, int w, int h, const char* const title) {
 	window = glfwCreateWindow(w, h, title, nullptr, nullptr);
 
 	glfwSetWindowPos(window, x, y);
@@ -32,18 +32,18 @@ void BaseOpenGLWindow::initWindow(int x, int y, int w, int h, const char* const 
 	glewInit();
 }
 
-void BaseOpenGLWindow::initViewport() const {
+void BaseController::initViewport() const {
 	int width, height;
 	glfwGetFramebufferSize(window, &width, &height);
 
 	glViewport(0, 0, width, height);
 }
 
-void BaseOpenGLWindow::registerKeyListener() const {
-	glfwSetKeyCallback(window, UserInputController::key_callback);
+void BaseController::registerKeyListener() const {
+	glfwSetKeyCallback(window, KeyCallbackHandler::key_callback);
 }
 
-void BaseOpenGLWindow::run() {
+void BaseController::run() {
 	GLfloat start = 0;
 	GLfloat dt = 0;
 
@@ -66,7 +66,7 @@ void BaseOpenGLWindow::run() {
 	glfwTerminate();
 }
 
-void BaseOpenGLWindow::loop(float dt) {
+void BaseController::loop(float dt) {
 	internalLogic->update(dt);
 	renderer->update(dt);
 	checkInput(dt);

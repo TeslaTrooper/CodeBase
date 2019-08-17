@@ -8,8 +8,6 @@ class Camera {
 	const Vec2 viewport;
 	const Entity* target;
 
-	const Mat4* recentTransformation;
-
 	struct Transformation {
 		Vec2 targetPosition;
 		Vec2 camPosition;

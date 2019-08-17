@@ -21,32 +21,32 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{B3CAFA8B-865D-4C02-B62B-0FA85DF046FA}</ProjectGuid>
     <RootNamespace>CodeBase</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -69,16 +69,16 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)\includes;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\libs\Win32;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)includes;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)libs\Win32;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>$(SolutionDir)\includes;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\libs\Win32;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)\includes;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\libs\Win64;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)includes;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)libs\Win64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(SolutionDir)\includes;$(IncludePath)</IncludePath>
@@ -105,7 +105,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\OpenGL\lib;C:\OpenAL\libs\Win32;C:\OpenAL\include;C:\OpenGL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -161,7 +161,7 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BaseOpenGLRenderer.cpp" />
+    <ClCompile Include="BaseRenderer.cpp" />
     <ClCompile Include="BmpReader.cpp" />
     <ClCompile Include="BufferConfigurator.cpp" />
     <ClCompile Include="Mat3.cpp" />
@@ -171,13 +171,13 @@
     <ClCompile Include="ShaderFactory.cpp" />
     <ClCompile Include="SoundDriver.cpp" />
     <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="UserInputController.cpp" />
+    <ClCompile Include="KeyCallbackHandler.cpp" />
     <ClCompile Include="Vec2.cpp" />
-    <ClCompile Include="BaseOpenGLWindow.cpp" />
+    <ClCompile Include="BaseController.cpp" />
     <ClCompile Include="WaveLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BaseOpenGLRenderer.h" />
+    <ClInclude Include="BaseRenderer.h" />
     <ClInclude Include="BmpReader.h" />
     <ClInclude Include="BufferConfigurator.h" />
     <ClInclude Include="Camera.h" />
@@ -193,9 +193,9 @@
     <ClInclude Include="SoundDriver.h" />
     <ClInclude Include="structs.h" />
     <ClInclude Include="Texture.h" />
-    <ClInclude Include="UserInputController.h" />
+    <ClInclude Include="KeyCallbackHandler.h" />
     <ClInclude Include="Vec2.h" />
-    <ClInclude Include="BaseOpenGLWindow.h" />
+    <ClInclude Include="BaseController.h" />
     <ClInclude Include="WaveLoader.h" />
   </ItemGroup>
   <ItemGroup>
