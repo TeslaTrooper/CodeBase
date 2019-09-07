@@ -20,6 +20,14 @@ void Shader::setUniformMatrix3(const GLchar* uniform, Mat3 value) const {
 	glUniformMatrix3fv(glGetUniformLocation(this->shaderProgram, uniform), 1, GL_FALSE, Mat3::ptr(value));
 }
 
+void Shader::setColor(const GLchar* uniform, Textures::Color color) const {
+	float r = (float) color.r / 255.f;
+	float g = (float) color.g / 255.f;
+	float b = (float) color.b / 255.f;
+
+	glUniform3f(glGetUniformLocation(this->shaderProgram, uniform), r, g, b);
+}
+
 void Shader::use() const {
 	glUseProgram(this->shaderProgram);
 }

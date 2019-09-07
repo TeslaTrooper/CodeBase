@@ -54,6 +54,8 @@ public:
 	*/
 	void setUniformMatrix3(const GLchar* uniform, Mat3 value) const;
 
+	void setColor(const GLchar* uniform, Textures::Color color) const;
+
 
 	/*
 	Verwendet das Program.
