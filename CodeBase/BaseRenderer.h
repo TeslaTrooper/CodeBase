@@ -7,12 +7,15 @@
 #include "structs.h"
 #include "Mat4.h"
 #include "BufferConfigurator.h"
+#include "InternalLogic.h"
 
 #define CLEAR_COLOR 0.0f
 
 using namespace Binding;
 
 class BaseRenderer {
+
+	InternalLogic* const logic;
 
 	BufferConfigurator bufferConfigurator;
 	map<int, FrameBuffer> framebuffers;
@@ -27,7 +30,9 @@ class BaseRenderer {
 
 public:
 
+	BaseRenderer(InternalLogic* const logic) : logic(logic) {};
 	virtual ~BaseRenderer();
+
 
 	/*
 		Creates a new framebuffer and changes the current render target to it.
