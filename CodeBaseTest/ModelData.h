@@ -35,8 +35,8 @@ public:
 };
 
 namespace Sqaure {
-	static const float* vertices = new float[8] { 0, 0, 0, 1, 1, 1, 1, 0 };
-	static const int* indices = new int[6] { 0, 1, 2, 0, 2, 3 };
+	static const float* vertices = new float[8]{ 0, 0, 0, 1, 1, 1, 1, 0 };
+	static const int* indices = new int[6]{ 0, 1, 2, 0, 2, 3 };
 
 	static const VertexData vertexData(vertices, VERTEX_COMP, 4);
 	static const IndexData indexData(indices, 6);
@@ -45,8 +45,8 @@ namespace Sqaure {
 }
 
 namespace TriangleData {
-	static const float* vertices = new float[6] { 0, 1.5, 2, 3, 2, 0 };
-	static const int* indices = new int[3] { 0, 2, 1 };
+	static const float* vertices = new float[6]{ 0, 1.5, 2, 3, 2, 0 };
+	static const int* indices = new int[3]{ 0, 2, 1 };
 
 	static const VertexData vertexData(vertices, VERTEX_COMP, 3);
 	static const IndexData indexData(indices, 3);
@@ -55,8 +55,8 @@ namespace TriangleData {
 }
 
 namespace Concave {
-	static const float* vertices = new float[10] { 0, 0, 0, 3, 2.5, 3, 0.5, 1.5, 2.5, 0 };
-	static const int* indices = new int[9] { 0, 3, 1, 1, 3, 2, 0, 4, 3 };
+	static const float* vertices = new float[10]{ 0, 0, 0, 3, 2.5, 3, 0.5, 1.5, 2.5, 0 };
+	static const int* indices = new int[9]{ 0, 3, 1, 1, 3, 2, 0, 4, 3 };
 
 	static const VertexData vertexData(vertices, VERTEX_COMP, 5);
 	static const IndexData indexData(indices, 9);
@@ -65,8 +65,8 @@ namespace Concave {
 }
 
 namespace Convex {
-	static const float* vertices = new float[10] { 0, 1, 0.5, 2, 2, 2.5, 2.5, 1, 1, 0 };
-	static const int* indices = new int[9] { 4, 1, 0, 4, 2, 1, 4, 3, 2 };
+	static const float* vertices = new float[10]{ 0, 1, 0.5, 2, 2, 2.5, 2.5, 1, 1, 0 };
+	static const int* indices = new int[9]{ 4, 1, 0, 4, 2, 1, 4, 3, 2 };
 
 	static const VertexData vertexData(vertices, VERTEX_COMP, 5);
 	static const IndexData indexData(indices, 9);

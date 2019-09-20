@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "pch.h"
 #include "CppUnitTest.h"
 
 // 16ms for 60 FPS
@@ -9,7 +9,7 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
-namespace CodeBaseTest {
+namespace PhysicsTest {
 
 	class Mock : public CollisionCallback {
 
@@ -34,7 +34,8 @@ namespace CodeBaseTest {
 			if (p1.y > 0) {
 				Vec2 v = e1->getMovement();
 				e2->setMovement(v);
-			} else {
+			}
+			else {
 				Vec2 v = e2->getMovement();
 				e1->setMovement(v);
 			}
@@ -61,17 +62,17 @@ namespace CodeBaseTest {
 
 	TEST_CLASS(CollisionTest) {
 
-		void assert(const vector<Entity*>& entities, int expected) {
-			for each (Entity* e in entities) {
-				Assert::AreEqual(expected, (int) e->getAcceleration());
+		void assert(const vector<Entity*> & entities, int expected) {
+			for each (Entity * e in entities) {
+				Assert::AreEqual(expected, (int)e->getAcceleration());
 			}
 		}
 
-		void assertCollision(const vector<Entity*>& entities) {
+		void assertCollision(const vector<Entity*> & entities) {
 			assert(entities, 1);
 		}
 
-		void assertNoCollision(const vector<Entity*>& entities) {
+		void assertNoCollision(const vector<Entity*> & entities) {
 			assert(entities, 0);
 		}
 
